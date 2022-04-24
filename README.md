@@ -31,7 +31,38 @@ A Saving accounts management application
     - [Scene Builder]()
     - [JavaFX SDK 18](https://gluonhq.com/products/javafx/)
     - [SQL Server Express 2019](https://www.microsoft.com/en-us/download/details.aspx?id=101064)
-- Go to  **File** -> **Settings..** -> **Build, Execution, Deployment** -> **Build Tools** -> **Gradle** -> Check if Gradle JVM is set to *Project SDK (16)*
+- Go to  **File** -> **Settings...** -> **Build, Execution, Deployment** -> **Build Tools** -> **Gradle** -> Check if Gradle JVM is set to *Project SDK (16)*
+- Open [**src/main/javaMain.java**](src/main/java/Main.java) to get default *Run/Debug Configuration*
+- **Edit Configuration** -> **Modify options** -> **Add VM options** -> Then add below text to your VM options
+````bash
+--module-path
+"package\javafx-sdk-18.0.1\lib"
+--add-modules
+javafx.controls,javafx.fxml
+--add-modules=javafx.base
+--add-modules=javafx.controls
+--add-modules=javafx.fxml
+--add-modules=javafx.graphics
+--add-modules=javafx.media
+--add-modules=javafx.swing
+--add-modules=javafx.web
+--add-opens
+javafx.base/com.sun.javafx.runtime=ALL-UNNAMED
+--add-opens
+javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED
+--add-opens
+javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED
+--add-opens
+javafx.base/com.sun.javafx.binding=ALL-UNNAMED
+--add-opens
+javafx.base/com.sun.javafx.event=ALL-UNNAMED
+--add-opens
+javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED
+--illegal-access=warn
+````
+- Run file [Savebase SQL](Savbase.sql) to get application test data
+- Update connection string in [db.properties](db.properties) file
+- Congrats! You're all set. Let's run the application.
 ## Authors
 
 - [Dương Bình Trọng](https://www.github.com/princ3od)

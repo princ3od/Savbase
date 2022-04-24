@@ -1,0 +1,9 @@
+@import './constants.css';
+
+.progress-bar {
+    -mfx-color1: black;
+    -mfx-color2: -primary;
+    -mfx-color3: black;
+    -mfx-color4: -primary;
+
+}

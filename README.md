@@ -31,7 +31,7 @@ A Saving accounts management application
     - [Scene Builder]()
     - [JavaFX SDK 18](https://gluonhq.com/products/javafx/)
     - [SQL Server Express 2019](https://www.microsoft.com/en-us/download/details.aspx?id=101064)
--
+- Go to  **File** -> **Settings..** -> **Build, Execution, Deployment** -> **Build Tools** -> **Gradle** -> Check if Gradle JVM is set to *Project SDK (16)*
 ## Authors
 
 - [Dương Bình Trọng](https://www.github.com/princ3od)

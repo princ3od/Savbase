@@ -1,0 +1,17 @@
+@import './constants.css';
+
+.jfx-snackbar-content {
+    -fx-background-color: #323232;
+    -fx-background-radius: 4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 8, 0, 0, 1);
+}
+.jfx-snackbar-toast {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 14;
+    -fx-font-weight: 400;
+}
+.jfx-snackbar-action {
+    -fx-text-fill: -primary;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}

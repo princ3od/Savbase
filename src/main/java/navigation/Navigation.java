@@ -20,17 +20,11 @@ public class Navigation {
     }
 
     private Stage mainStage;
-    private String currentScene;
     private Stack<String> scenes = new Stack();
 
     public String getCurrentScene() {
-        return currentScene;
+        return scenes.peek();
     }
-
-    public void setCurrentScene(String currentScene) {
-        this.currentScene = currentScene;
-    }
-
 
     public Stage getMainStage() {
         return mainStage;
@@ -40,13 +34,14 @@ public class Navigation {
         this.mainStage = mainStage;
     }
 
-    public  void restart() throws IOException {
+    public void restart() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ScenePaths.SPLASH));
         mainStage.close();
         Scene scene = new Scene(fxmlLoader.load());
         mainStage.setScene(scene);
         mainStage.show();
     }
+
     public void push(String sceneName, boolean resizeStage) {
         if (mainStage != null) {
             System.out.println("Navigate to " + sceneName);
@@ -65,9 +60,24 @@ public class Navigation {
         }
     }
 
+    public void replace(String sceneName, boolean resizeStage) {
+        if (!scenes.empty()) {
+            scenes.pop();
+        }
+        push(sceneName, resizeStage);
+    }
+
+    public void pushAndRemoveAll(String sceneName, boolean resizeStage) {
+        while (!scenes.empty()) {
+            scenes.pop();
+        }
+        push(sceneName, resizeStage);
+    }
+
     public void back() {
         if (mainStage != null) {
-            String previousScene = scenes.pop();
+            scenes.pop();
+            String previousScene = scenes.peek();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(previousScene));
             Scene scene = null;
             try {

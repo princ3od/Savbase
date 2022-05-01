@@ -32,7 +32,7 @@ public class SplashController {
         startupCommand.setOnSucceed(new Callback() {
             @Override
             public Object call(Object param) {
-                Navigation.getInstance().push(ScenePaths.LOGIN, false);
+                Navigation.getInstance().push(ScenePaths.LOGIN);
                 return null;
             }
         });

@@ -1,0 +1,23 @@
+@import './constants.css';
+
+.tab {
+    -fx-background-radius: 24 0 0 24;
+    -fx-background-color: #fafafa;
+    -fx-padding: 8 48;
+}
+
+.tab:hover {
+    -fx-text-fill: -primary;
+    -fx-background-color: #E0E0E0;
+}
+
+.tab-selected {
+    -fx-background-radius: 24 0 0 24;
+    -fx-text-fill: -primary;
+    -fx-background-color: #E0E0E0;
+    -fx-padding: 8 48;
+}
+
+.tabpage {
+    -fx-background-color: #E0E0E0;
+}

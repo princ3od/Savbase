@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+    <children>
+        <BorderPane fx:id="content" prefHeight="200.0" prefWidth="200.0">
+            <left>
+                <VBox alignment="TOP_RIGHT" prefHeight="800.0" prefWidth="250.0" spacing="8.0" style="-fx-background-color: FAFAFA;" BorderPane.alignment="TOP_CENTER">
+                    <children>
+                        <Pane fx:id="pnHeader" onMouseClicked="#onExpand" prefHeight="220.0" prefWidth="250.0">
+                            <children>
+                                <Text fx:id="lbUsername" layoutX="55.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="165.234375">
+                                    <font>
+                                        <Font name="Segoe UI Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <ImageView layoutX="14.0" layoutY="60.0">
+                                    <image>
+                                        <Image url="@../images/user.png" />
+                                    </image>
+                                </ImageView>
+                                <JFXButton fx:id="btnViewInfo" layoutX="27.0" layoutY="120.0" minHeight="0.0" minWidth="0.0" prefHeight="39.0" prefWidth="196.0" styleClass="flat-button" stylesheets="@../css/button.css" text="Xem thông tin">
+                                    <font>
+                                        <Font name="Segoe UI Semibold" size="16.0" />
+                                    </font>
+                                </JFXButton>
+                                <JFXButton fx:id="btnLogout" layoutX="27.0" layoutY="168.0" onAction="#onLogout" prefHeight="39.0" prefWidth="196.0" styleClass="flat-button" stylesheets="@../css/button.css" text="Đăng xuất">
+                                    <font>
+                                        <Font name="Segoe UI Semibold" size="16.0" />
+                                    </font>
+                                </JFXButton>
+                                <Separator layoutX="25.0" layoutY="108.0" prefWidth="200.0" />
+                                <Separator layoutX="25.0" layoutY="219.0" prefWidth="200.0" />
+                                <JFXButton fx:id="btnExpand" contentDisplay="GRAPHIC_ONLY" layoutX="209.0" layoutY="60.0" onMouseClicked="#onExpand" prefHeight="32.0" prefWidth="32.0" ripplerFill="#e0e0e0" text="Open">
+                                    <graphic>
+                                        <ImageView fitHeight="16.0" fitWidth="16.0">
+                                            <image>
+                                                <Image url="@../images/down-arrow.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                            </children>
+                            <padding>
+                                <Insets top="16.0" />
+                            </padding>
+                     <VBox.margin>
+                        <Insets bottom="16.0" />
+                     </VBox.margin>
+                        </Pane>
+                        <JFXButton fx:id="btnAccounts" alignment="BASELINE_LEFT" onAction="#onChangeTab" prefHeight="39.0" prefWidth="220.0" styleClass="tab" stylesheets="@../css/tab.css" text="Danh sách sổ">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnTransactions" alignment="BASELINE_LEFT" onAction="#onChangeTab" prefHeight="39.0" prefWidth="220.0" styleClass="tab" stylesheets="@../css/tab.css" text="Giao dịch">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnReport" alignment="BASELINE_LEFT" onAction="#onChangeTab" prefHeight="39.0" prefWidth="220.0" styleClass="tab" stylesheets="@../css/tab.css" text="Báo cáo">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnSetting" alignment="BASELINE_LEFT" onAction="#onChangeTab" prefHeight="39.0" prefWidth="220.0" styleClass="tab" stylesheets="@../css/tab.css" text="Cài đặt">
+                            <font>
+                                <Font name="Segoe UI Semibold" size="16.0" />
+                            </font>
+                        </JFXButton>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets />
+                    </BorderPane.margin>
+                </VBox>
+            </left>
+        </BorderPane>
+    </children>
+</StackPane>

@@ -15,10 +15,6 @@
     -fx-effect: none;
 }
 
-.flat-button {
+.flat-button:hover {
     -fx-text-fill: -primary;
-    -fx-background-radius: 32;
-    -fx-font: "Segoe UI";
-    -fx-font-size: 18;
-    -fx-font-weight: bold;
 }

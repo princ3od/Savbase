@@ -1,35 +1,35 @@
 package navigation;
 
 public interface ScenePaths {
-    public static String SPLASH = "/views/splash.fxml";
-    public static String LOGIN = "/views/login.fxml";
-    public static String HOME = "/views/home.fxml";
+    String SPLASH = "/views/splash.fxml";
+    String LOGIN = "/views/login.fxml";
+    String HOME = "/views/home.fxml";
 
-    public interface TabPagePaths {
-        public static String ACCOUNTS = "";
-        public static String TRANSACTIONS = "";
-        public static String REPORT = "";
-        public static String SETTING = "";
+    interface TabPagePaths {
+        String ACCOUNTS = "/views/accounts/accounts_tab.fxml";
+        String TRANSACTIONS = "/views/transactions/transactions_tab.fxml";
+        String REPORT = "/views/report/report_tab.fxml";
+        String SETTING = "/views/setting/setting_tab.fxml";
 
-        public static interface TransactionsTab {
-            public static String MONEY_DEPOSIT = "";
-            public static String MONEY_WITHDRAW = "";
+        interface TransactionsTab {
+            String MONEY_DEPOSIT = "";
+            String MONEY_WITHDRAW = "";
         }
 
-        public static interface ReportTab {
-            public static String SALES = "";
-            public static String OPEN_CLOSE_ACCOUNTS = "";
+        interface ReportTab {
+            String SALES = "";
+            String OPEN_CLOSE_ACCOUNTS = "";
         }
 
-        public static interface SettingTab {
-            public static String ACCOUNT_TYPES = "";
-            public static String OTHERS = "";
-            public static String EMPLOYEES = "";
+        interface SettingTab {
+            String ACCOUNT_TYPES = "";
+            String OTHERS = "";
+            String EMPLOYEES = "";
         }
     }
 
-    public interface DialogPaths {
-        public static String LOGIN = "/views/login.fxml";
+    interface DialogPaths {
+        String LOGIN = "/views/login.fxml";
 
     }
 }

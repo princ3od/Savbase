@@ -8,10 +8,7 @@ import java.util.ResourceBundle;
 import command.LoginCommand;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import models.Account;
@@ -20,7 +17,6 @@ import navigation.ScenePaths;
 import stores.AppStore;
 import utils.SnackBarUtils;
 
-import javax.naming.Binding;
 
 public class LoginController {
 
@@ -74,7 +70,7 @@ public class LoginController {
                     SnackBarUtils.getInstance().show(root, "Tài khoản hoặc mật khẩu không hợp lệ.");
                 } else {
                     AppStore.setCurrentAccount((Account) loginCommand.getResult());
-                    Navigation.getInstance().push(ScenePaths.HOME, true);
+                    Navigation.getInstance().pushAndRemoveAll(ScenePaths.HOME);
                 }
                 return null;
             }

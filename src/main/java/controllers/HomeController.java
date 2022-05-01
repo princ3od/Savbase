@@ -1,48 +1,129 @@
 package controllers;
 
 import com.jfoenix.controls.*;
+import constants.Constants;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.util.Duration;
+import navigation.Navigable;
 import navigation.Navigation;
+import navigation.ScenePaths;
 import stores.AppStore;
 import utils.SnackBarUtils;
 
-public class HomeController {
+import java.io.IOException;
+
+public class HomeController extends Navigable {
     @FXML
     private StackPane root;
 
     @FXML
-    void initialize() {
-        SnackBarUtils.getInstance().show(root, "Chào mừng " + AppStore.getCurrentAccount().getStaffName() + " quay trở lại!");
+    private BorderPane content;
+
+    @FXML
+    private Pane pnHeader;
+
+    @FXML
+    private Text lbUsername;
+
+    @FXML
+    private JFXButton btnExpand;
+
+    @FXML
+    private JFXButton btnAccounts;
+
+    @FXML
+    private JFXButton btnTransactions;
+
+    @FXML
+    private JFXButton btnReport;
+
+    @FXML
+    private JFXButton btnSetting;
+
+    boolean isExpanded = false;
+
+    @Override
+    public void push(String tabName) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(tabName));
+        try {
+            System.out.println("[NAVIGATION] Change to tab " + tabName);
+            content.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    Rectangle clipRect;
 
-    public void onShowSnackbar(ActionEvent actionEvent) {
-        JFXDialogLayout layout = new JFXDialogLayout();
-//        layout.setHeading(new Label("Header"));
-        layout.setBody(new Label("Lorem ipsum"));
+    @FXML
+    void initialize() {
+        clipRect = new Rectangle(pnHeader.getWidth(), pnHeader.getHeight());
+        clipRect.heightProperty().bind(pnHeader.heightProperty());
+        clipRect.widthProperty().bind(pnHeader.widthProperty());
+        pnHeader.setClip(clipRect);
+        pnHeader.setMaxHeight(100);
+        SnackBarUtils.getInstance().show(root, "Chào mừng " + AppStore.getCurrentAccount().getStaffName() + " quay trở lại!");
+        lbUsername.textProperty().setValue(AppStore.getCurrentAccount().getStaffName());
+        btnReport.setVisible(AppStore.getCurrentAccount().isAdmin());
+        btnSetting.setVisible(AppStore.getCurrentAccount().isAdmin());
+        push(ScenePaths.TabPagePaths.ACCOUNTS);
+        btnAccounts.getStyleClass().setAll("tab-selected");
+    }
 
-        JFXDialog dialog = new JFXDialog(root, layout,
-                JFXDialog.DialogTransition.CENTER);
-        dialog.show();
-        JFXAlert alert = new JFXAlert(Navigation.getInstance().getMainStage());
-        alert.initModality(Modality.APPLICATION_MODAL);
-        alert.setOverlayClose(false);
-        layout = new JFXDialogLayout();
-//        layout.setHeading(new Label("Modal Dialog using JFXAlert"));
-        layout.setBody(new Label("Lorem ipsum dolor sit amet, consectetur adipiscing elit,"
-                + " sed do eiusmod tempor incididunt ut labore et dolore magna"
-                + " aliqua. Utenim ad minim veniam, quis nostrud exercitation"
-                + " ullamco laboris nisi ut aliquip ex ea commodo consequat."));
-        JFXButton closeButton = new JFXButton("ACCEPT");
-        closeButton.getStyleClass().add("dialog-accept");
-        closeButton.setOnAction(event -> alert.hideWithAnimation());
-        layout.setActions(closeButton);
-        alert.setContent(layout);
-//        alert.show();
+    public void onExpand(MouseEvent mouseEvent) {
+        changeSize(pnHeader, pnHeader.getMaxWidth(), isExpanded ? Constants.COLLAPSED_HOME_HEADER_HEIGHT : Constants.EXPANDED_HOME_HEADER_HEIGHT);
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(Constants.DEFAULT_ANIMATION_TIME), btnExpand);
+        rotateTransition.setToAngle(isExpanded ? Constants.NORMAL_ANGLE : Constants.UP_SIDE_DOWN_ANGLE);
+        rotateTransition.play();
+        isExpanded = !isExpanded;
+    }
+
+    public void onLogout(ActionEvent actionEvent) {
+        Navigation.getInstance().pushAndRemoveAll(ScenePaths.LOGIN);
+    }
+
+    public void onChangeTab(ActionEvent actionEvent) {
+        JFXButton source = (JFXButton) actionEvent.getSource();
+        if (source == btnAccounts) {
+            push(ScenePaths.TabPagePaths.ACCOUNTS);
+        } else if (source == btnTransactions) {
+            push(ScenePaths.TabPagePaths.TRANSACTIONS);
+        } else if (source == btnSetting) {
+            push(ScenePaths.TabPagePaths.SETTING);
+        } else if (source == btnReport) {
+            push(ScenePaths.TabPagePaths.REPORT);
+        }
+        setSelectedTabButton(source);
+    }
+
+    void setSelectedTabButton(JFXButton btn) {
+        btnAccounts.getStyleClass().setAll("tab");
+        btnTransactions.getStyleClass().setAll("tab");
+        btnSetting.getStyleClass().setAll("tab");
+        btnReport.getStyleClass().setAll("tab");
+        btn.getStyleClass().setAll("tab-selected");
+    }
+
+    void changeSize(final Pane pane, double width, double height) {
+        Duration cycleDuration = Duration.millis(Constants.DEFAULT_ANIMATION_TIME);
+        Timeline timeline = new Timeline(
+                new KeyFrame(cycleDuration,
+                        new KeyValue(pane.maxWidthProperty(), width, Interpolator.EASE_BOTH)),
+                new KeyFrame(cycleDuration,
+                        new KeyValue(pane.maxHeightProperty(), height, Interpolator.EASE_BOTH))
+        );
+
+        timeline.play();
     }
 }

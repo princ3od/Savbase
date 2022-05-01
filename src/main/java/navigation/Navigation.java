@@ -42,36 +42,30 @@ public class Navigation {
         mainStage.show();
     }
 
-    public void push(String sceneName, boolean resizeStage) {
+    public void push(String sceneName) {
         if (mainStage != null) {
-            System.out.println("Navigate to " + sceneName);
-
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(sceneName));
-            Scene scene = null;
             try {
-                scene = new Scene(fxmlLoader.load());
+                mainStage.getScene().setRoot(fxmlLoader.load());
             } catch (IOException e) {
                 e.printStackTrace();
             }
             scenes.push(sceneName);
-            mainStage.setScene(scene);
-            if (resizeStage)
-                mainStage.sizeToScene();
         }
     }
 
-    public void replace(String sceneName, boolean resizeStage) {
+    public void replace(String sceneName) {
         if (!scenes.empty()) {
             scenes.pop();
         }
-        push(sceneName, resizeStage);
+        push(sceneName);
     }
 
-    public void pushAndRemoveAll(String sceneName, boolean resizeStage) {
+    public void pushAndRemoveAll(String sceneName) {
         while (!scenes.empty()) {
             scenes.pop();
         }
-        push(sceneName, resizeStage);
+        push(sceneName);
     }
 
     public void back() {
@@ -79,13 +73,11 @@ public class Navigation {
             scenes.pop();
             String previousScene = scenes.peek();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(previousScene));
-            Scene scene = null;
             try {
-                scene = new Scene(fxmlLoader.load());
+                mainStage.getScene().setRoot(fxmlLoader.load());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            mainStage.setScene(scene);
             mainStage.sizeToScene();
         }
     }

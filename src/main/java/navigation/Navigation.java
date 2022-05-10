@@ -2,6 +2,7 @@ package navigation;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,6 +33,10 @@ public class Navigation {
 
     public void setMainStage(Stage mainStage) {
         this.mainStage = mainStage;
+    }
+
+    public Pane getRoot() {
+        return (Pane) mainStage.getScene().getRoot();
     }
 
     public void restart() throws IOException {

@@ -64,7 +64,6 @@ public class LoginController {
         loginCommand.setOnSucceed(new Callback() {
             @Override
             public Object call(Object param) {
-
                 setOnLogin(false);
                 if (loginCommand.getResult() == null) {
                     SnackBarUtils.getInstance().show(root, "Tài khoản hoặc mật khẩu không hợp lệ.");
@@ -85,6 +84,5 @@ public class LoginController {
         });
         loginCommand.execute();
     }
-
 
 }

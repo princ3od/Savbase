@@ -2,11 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dialogs.ViewAccountController">
     <children>
-        <JFXButton layoutX="168.0" layoutY="104.0" text="qwqwe" />
+        <JFXButton fx:id="btn" layoutX="198.0" layoutY="104.0" onAction="#onAction" text="qwqwe" />
         <JFXRadioButton layoutX="207.0" layoutY="167.0" text="sdfsdf" />
     </children>
 </AnchorPane>

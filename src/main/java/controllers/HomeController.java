@@ -125,12 +125,13 @@ public class HomeController extends Navigable {
                 new KeyFrame(cycleDuration,
                         new KeyValue(pane.maxHeightProperty(), height, Interpolator.EASE_BOTH))
         );
-
         timeline.play();
     }
 
     public void onViewInfo(ActionEvent actionEvent) throws Exception {
-        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_ACCOUNT, "Thông tin nhân viên");
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_ACCOUNT, "Thông tin nhân viên", "Nút mtk");
         String result = dialog.showAndWait();
+        // Run after dialog closed
+        SnackBarUtils.getInstance().show(root, "Thêm thành công!");
     }
 }

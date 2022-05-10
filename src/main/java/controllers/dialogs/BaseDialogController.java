@@ -15,4 +15,17 @@ public abstract class BaseDialogController {
         this.dialog = dialog;
     }
 
+    public Object getParam() {
+        return param;
+    }
+
+    public void setParam(Object param) {
+        this.param = param;
+        onSetParam();
+    }
+
+    public abstract void onSetParam();
+
+    Object param;
+
 }

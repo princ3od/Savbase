@@ -12,6 +12,7 @@ public class StartupCommand extends BaseCommand {
             protected Object call() throws Exception {
                 Thread.sleep(Constants.DEFAULT_COMMAND_DELAY_TIME);
                 LocalSettings.getConnectionString();
+//                LocalSettings.getUserSetting();
                 return null;
             }
         };

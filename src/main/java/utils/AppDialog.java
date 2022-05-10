@@ -27,6 +27,15 @@ public class AppDialog<T> {
 
     JFXAlert dialog;
     T result;
+    Object param;
+
+    public Object getParam() {
+        return param;
+    }
+
+    public void setParam(Object param) {
+        this.param = param;
+    }
 
     public T getResult() {
         return result;
@@ -45,10 +54,18 @@ public class AppDialog<T> {
         this.dialogPath = dialogPath;
         this.headingText = headingText;
     }
-    public AppDialog(String dialogPath, String headingText, boolean overlayClose) {
+
+    public AppDialog(String dialogPath, String headingText, Object param) {
+        this.dialogPath = dialogPath;
+        this.headingText = headingText;
+        this.param = param;
+    }
+
+    public AppDialog(String dialogPath, String headingText, boolean overlayClose, Object param) {
         this.dialogPath = dialogPath;
         this.headingText = headingText;
         this.overlayClose = overlayClose;
+        this.param = param;
     }
 
     void initializeDialog() throws Exception {
@@ -57,8 +74,10 @@ public class AppDialog<T> {
         try {
             layout.getChildren().add(fxmlLoader.load());
             BaseDialogController controller = fxmlLoader.getController();
-            if (controller != null) controller.setDialog(this);
-            else throw new Exception("Please attach a controller to dialog.");
+            if (controller != null) {
+                controller.setDialog(this);
+                controller.setParam(this.param);
+            } else throw new Exception("Please attach a controller to dialog.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -94,8 +113,21 @@ public class AppDialog<T> {
         dialog.show();
     }
 
+    public void show(boolean overlayClose) throws Exception {
+        initializeDialog();
+        dialog.setOverlayClose(overlayClose);
+        dialog.show();
+    }
+
     public T showAndWait() throws Exception {
         initializeDialog();
+        dialog.showAndWait();
+        return result;
+    }
+
+    public T showAndWait(boolean overlayClose) throws Exception {
+        initializeDialog();
+        dialog.setOverlayClose(overlayClose);
         dialog.showAndWait();
         return result;
     }

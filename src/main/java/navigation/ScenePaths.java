@@ -29,7 +29,7 @@ public interface ScenePaths {
     }
 
     interface DialogPaths {
-        String LOGIN = "/views/login.fxml";
+        String VIEW_ACCOUNT = "/views/dialogs/view_account_dialog.fxml";
 
     }
 }

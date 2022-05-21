@@ -1,6 +1,7 @@
 package controllers.tabs;
 
 import command.SavingAccountCommand;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,6 +56,14 @@ public class AccountsTabController {
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("savingAccountType"));
         surplusColumn.setCellValueFactory(new PropertyValueFactory<>("surplus"));
         tbvSavingAccount.getColumns().addAll(nameColumn,idColumn, nationalIdColumn, typeColumn, surplusColumn);
+        tbvSavingAccount.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<SavingAccount>() {
+            @Override
+            public void onChanged(Change<? extends SavingAccount> c) {
+                for (SavingAccount s: c.getList()){
+                    System.out.println(s.getName() + s.getNationalId());
+                }
+            }
+        });
         command = new SavingAccountCommand();
         setOnFetching(true);
         command.setOnSucceed(new Callback() {

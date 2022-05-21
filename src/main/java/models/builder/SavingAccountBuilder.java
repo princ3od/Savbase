@@ -13,6 +13,10 @@ public class SavingAccountBuilder {
     private Date openDate;
     private Date closeDate;
     private boolean status;
+    private String email;
+    private String sex;
+    private String phoneNumber;
+    private String address;
 
     public SavingAccountBuilder setId(int id) {
         this.id = id;
@@ -54,7 +58,27 @@ public class SavingAccountBuilder {
         return this;
     }
 
+    public SavingAccountBuilder setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public SavingAccountBuilder setSex(String sex) {
+        this.sex = sex;
+        return this;
+    }
+
+    public SavingAccountBuilder setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public SavingAccountBuilder setAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
     public SavingAccount getResult() {
-        return new SavingAccount(name, id, nationalId, savingAccountType, surplus, openDate, closeDate, status);
+        return new SavingAccount(name, id, nationalId, savingAccountType, surplus, openDate, closeDate, status, email, sex, phoneNumber, address);
     }
 }

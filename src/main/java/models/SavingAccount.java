@@ -11,8 +11,28 @@ public class SavingAccount {
     private Date openDate;
     private Date closeDate;
     private boolean status;
+    private String email;
+    private String sex;
+    private String phoneNumber;
+    private String address;
 
-    public SavingAccount(String name, int id, String nationalId, String savingAccountType, double surplus, Date openDate, Date closeDate, boolean status) {
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public SavingAccount(String name, int id, String nationalId, String savingAccountType, double surplus, Date openDate, Date closeDate, boolean status, String email, String sex, String phoneNumber, String address) {
         this.name = name;
         this.id = id;
         this.nationalId = nationalId;
@@ -21,6 +41,10 @@ public class SavingAccount {
         this.openDate = openDate;
         this.closeDate = closeDate;
         this.status = status;
+        this.email = email;
+        this.sex = sex;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
     public Date getOpenDate() {

@@ -1,6 +1,10 @@
 package controllers.tabs;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXProgressBar;
 import command.SavingAccountCommand;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,15 +14,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.util.Callback;
 import models.SavingAccount;
+import navigation.ScenePaths;
+import utils.AppDialog;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class AccountsTabController {
     @FXML
 //    private AnchorPane root;
     SavingAccountCommand command;
     @FXML
-    private Button btnAdd;
+    private JFXButton btnAdd;
 
     @FXML
     private TableView<SavingAccount> tbvSavingAccount = new TableView<SavingAccount>();
@@ -42,7 +49,7 @@ public class AccountsTabController {
     private TextField txtSearch;
 
     @FXML
-    private ProgressBar progressBar;
+    private JFXProgressBar progressBar;
 
     void setOnFetching(boolean isLoading) {
         progressBar.setVisible(isLoading);
@@ -51,21 +58,39 @@ public class AccountsTabController {
     @FXML
     void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.setPrefWidth(200);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idColumn.setPrefWidth(200);
         nationalIdColumn.setCellValueFactory(new PropertyValueFactory<>("nationalId"));
+        nationalIdColumn.setPrefWidth(150);
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("savingAccountType"));
+        typeColumn.setPrefWidth(150);
         surplusColumn.setCellValueFactory(new PropertyValueFactory<>("surplus"));
+        surplusColumn.setPrefWidth(200);
+        tbvSavingAccount.getColumns().clear();
         tbvSavingAccount.getColumns().addAll(nameColumn,idColumn, nationalIdColumn, typeColumn, surplusColumn);
-        tbvSavingAccount.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<SavingAccount>() {
+
+        tbvSavingAccount.getColumns().forEach(new Consumer<TableColumn<SavingAccount, ?>>() {
             @Override
-            public void onChanged(Change<? extends SavingAccount> c) {
-                for (SavingAccount s: c.getList()){
-                    System.out.println(s.getName() + s.getNationalId());
+            public void accept(TableColumn<SavingAccount, ?> savingAccountTableColumn) {
+                savingAccountTableColumn.setResizable(false);
+                savingAccountTableColumn.setSortable(false);
+            }
+        });
+        tbvSavingAccount.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<SavingAccount>() {
+            @Override
+            public void changed(ObservableValue<? extends SavingAccount> observable, SavingAccount oldValue, SavingAccount newValue) {
+                if (newValue != null) {
+                    AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_ACCOUNT, "Thông tin sổ tiết kiệm", newValue);
+                    try {
+                        dialog.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
         command = new SavingAccountCommand();
-        setOnFetching(true);
         command.setOnSucceed(new Callback() {
             @Override
             public Object call(Object param) {

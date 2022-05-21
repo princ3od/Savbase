@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:controller="controllers.tabs.AccountsTabController" prefHeight="400.0" prefWidth="600.0" styleClass="tabpage" stylesheets="@../../css/tab.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="755.0" prefWidth="868.0" styleClass="tabpage" stylesheets="@../../css/tab.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.AccountsTabController">
    <children>
-      <CheckBox layoutX="246.0" layoutY="175.0" mnemonicParsing="false" text="Danh sách sổ" />
+      <TableView fx:id="tbvSavingAccount" layoutX="32.0" layoutY="136.0" prefHeight="560.0" prefWidth="804.0" stylesheets="@../../css/table.css" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" />
+      <TextField fx:id="txtSearch" layoutX="35.0" layoutY="14.0" onInputMethodTextChanged="#onSearchChange" prefHeight="38.0" prefWidth="804.0" style="-fx-background-color: #fff; -fx-background-radius: 30;" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="32.0">
+         <effect>
+            <InnerShadow blurType="ONE_PASS_BOX" choke="1.0" color="#e8e8e8" />
+         </effect></TextField>
+      <JFXButton fx:id="btnAdd" layoutX="732.0" layoutY="79.0" onAction="#onOpenAdd" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Mở sổ mới" textFill="WHITE" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="79.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
+      <JFXProgressBar fx:id="progressBar" layoutX="39.0" layoutY="134.0" prefHeight="4.0" prefWidth="796.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" />
    </children>
 </AnchorPane>

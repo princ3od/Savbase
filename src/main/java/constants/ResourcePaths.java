@@ -1,5 +1,6 @@
 package constants;
 
 public interface ResourcePaths {
-    public static String LOGO = "/images/logo.png";
+    String LOGO = "/images/logo.png";
+    String CSS_SNACKBAR = "css/snackbar.css";
 }

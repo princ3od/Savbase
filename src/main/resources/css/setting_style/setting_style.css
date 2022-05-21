@@ -1,0 +1,23 @@
+@import '../constants.css';
+.tab {
+    -fx-pref-height: 60;
+    -fx-pref-width: 300;
+}
+
+.tab-header-background{
+    -fx-background-color: #ffffff;
+}
+
+
+.tab-selected-line{
+    -fx-border-color: #ef2020;
+}
+
+
+.root {
+    -tab-text-color: -fx-text-base-color ;
+}
+
+.tab-label {
+    -fx-text-fill: -tab-text-color ;
+}

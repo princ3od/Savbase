@@ -14,13 +14,13 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                <children>
                   <JFXButton id="btnAdd" fx:id="btnAdd" layoutX="892.0" layoutY="21.0" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: #32a05f; -fx-text-fill: #ffffff;" text="Thêm mới" />
-                  <TableView layoutX="3.0" layoutY="74.0" prefHeight="573.0" prefWidth="1092.0" style="-fx-border-color: #ffffff;" stylesheets="@../../css/setting_style/table_style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+                  <TableView id="tbSavingTypes" fx:id="tbSavingTypes" layoutX="20.0" layoutY="100.0" prefHeight="425.0" prefWidth="1052.0" style="-fx-border-color: #ffffff;" stylesheets="@../../css/setting_style/table_style.css" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
                     <columns>
-                      <TableColumn prefWidth="261.9999694824219" text="Loại sổ" />
-                      <TableColumn minWidth="0.0" prefWidth="0.0" text="Kỳ hạn" />
-                        <TableColumn minWidth="0.0" prefWidth="246.0" text="Lãi suất (%)" />
-                        <TableColumn minWidth="0.0" prefWidth="349.0" text="Số ngày gửi tối thiểu" />
-                        <TableColumn minWidth="0.0" prefWidth="234.0" text="Quy định rút tiền" />
+                      <TableColumn fx:id="typeSavingCol" minWidth="0.0" prefWidth="200.0" text="Loại sổ" />
+                      <TableColumn fx:id="tenorCol" minWidth="0.0" prefWidth="200.0" text="Kỳ hạn" />
+                        <TableColumn fx:id="interestRateCol" minWidth="0.0" prefWidth="120.0" text="Lãi suất (%)" />
+                        <TableColumn fx:id="minSendingDateCol" minWidth="0.0" prefWidth="200.0" text="Số ngày gửi tối thiểu" />
+                        <TableColumn fx:id="ruleCol" minWidth="0.0" prefWidth="300.0" text="Quy định rút tiền" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

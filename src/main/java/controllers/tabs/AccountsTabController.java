@@ -12,17 +12,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import models.SavingAccount;
 import navigation.ScenePaths;
 import utils.AppDialog;
+import utils.SnackBarUtils;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class AccountsTabController {
     @FXML
-//    private AnchorPane root;
+    private StackPane root;
     SavingAccountCommand command;
     @FXML
     private JFXButton btnAdd;
@@ -104,7 +106,7 @@ public class AccountsTabController {
             @Override
             public Object call(Object param) {
                 setOnFetching(false);
-//                SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
+                SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
                 return null;
             }
         });
@@ -114,8 +116,12 @@ public class AccountsTabController {
 
     @FXML
     void onOpenAdd(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.showAndWait();
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.ADD_ACCOUNT, "Tạo sổ", null);
+        try {
+            dialog.showAndWait(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

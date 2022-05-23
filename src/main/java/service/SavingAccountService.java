@@ -6,6 +6,7 @@ import models.SavingAccount;
 import models.builder.SavingAccountBuilder;
 
 import javax.sql.rowset.CachedRowSet;
+import java.sql.Date;
 import java.util.ArrayList;
 
 
@@ -25,6 +26,20 @@ public class SavingAccountService {
         }
         ObservableList<SavingAccount> result = FXCollections.observableArrayList(savingAccounts);
         return result;
+
+    }
+
+    public static void create(String createType, String CMND, String sex, Date birthDate, String name, String address
+            , String email, String phone, String savingType, Date openDate, double initMoney) throws Exception {
+        if (createType.equals("Cho khách hàng cũ")) {
+           ExecuteQuery.executeReader("{CALL Savbase_CreateNewAccountForOldUser(?, ?, ?, ?)}"
+                    , new Object[]{CMND, savingType, openDate, initMoney});
+
+        }
+        else {
+            ExecuteQuery.executeReader("{CALL Savbase_CreateNewAccountForNewCustomer(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"
+                    , new Object[]{name, CMND, address, phone, email, sex.equals("Nam") ? 1 : 0, birthDate, savingType, openDate, initMoney});
+        }
 
     }
 }

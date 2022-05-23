@@ -21,6 +21,7 @@ import utils.SnackBarUtils;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class AccountsTabController {
     @FXML
@@ -112,6 +113,26 @@ public class AccountsTabController {
         });
         command.execute();
 
+        txtSearch.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                tbvSavingAccount.getSelectionModel().clearSelection();
+                if (newValue.isEmpty()) {
+                    tbvSavingAccount.setItems((ObservableList<SavingAccount>) command.getResult());
+                }
+                else {
+                    tbvSavingAccount.setItems(((ObservableList<SavingAccount>) command.getResult()).filtered(new Predicate<SavingAccount>() {
+                        @Override
+                        public boolean test(SavingAccount savingAccount) {
+                            return savingAccount.getName().contains(txtSearch.getCharacters())
+                                    || savingAccount.getNationalId().contains(txtSearch.getCharacters())
+                                    || (savingAccount.getId() + "").contains(txtSearch.getCharacters());
+                        }
+                    }));
+
+                }
+            }
+        });
     }
 
     @FXML
@@ -124,10 +145,6 @@ public class AccountsTabController {
         }
     }
 
-    @FXML
-    void onSearchChange(InputMethodEvent event) {
-
-    }
 
 
 }

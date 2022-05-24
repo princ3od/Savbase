@@ -126,4 +126,8 @@ public class HomeController extends Navigable {
 
         timeline.play();
     }
+
+    public void btnViewInfoOnClicked(MouseEvent mouseEvent) {
+
+    }
 }

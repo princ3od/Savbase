@@ -1,40 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTabPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TableColumn?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1092.0" style="-fx-background-color: #ffffff;" stylesheets="@../../css/setting_style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.SettingController">
-   <tabs>
-      <Tab fx:id="tabTypeSaveMoney" text="Loại tiếp kiệm">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-               <children>
-                  <JFXButton id="btnAdd" fx:id="btnAdd" layoutX="892.0" layoutY="21.0" prefHeight="31.0" prefWidth="151.0" style="-fx-background-color: #32a05f; -fx-text-fill: #ffffff;" text="Thêm mới" />
-                  <TableView id="tbSavingTypes" fx:id="tbSavingTypes" layoutX="20.0" layoutY="100.0" prefHeight="425.0" prefWidth="1052.0" style="-fx-border-color: #ffffff;" stylesheets="@../../css/setting_style/table_style.css" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
-                    <columns>
-                      <TableColumn fx:id="typeSavingCol" minWidth="0.0" prefWidth="200.0" text="Loại sổ" />
-                      <TableColumn fx:id="tenorCol" minWidth="0.0" prefWidth="200.0" text="Kỳ hạn" />
-                        <TableColumn fx:id="interestRateCol" minWidth="0.0" prefWidth="120.0" text="Lãi suất (%)" />
-                        <TableColumn fx:id="minSendingDateCol" minWidth="0.0" prefWidth="200.0" text="Số ngày gửi tối thiểu" />
-                        <TableColumn fx:id="ruleCol" minWidth="0.0" prefWidth="300.0" text="Quy định rút tiền" />
-                    </columns>
-                  </TableView>
-               </children></AnchorPane>
-        </content>
-      </Tab>
-      <Tab fx:id="tabOtherInfo" text="Thông số khác">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1180.0" />
-        </content>
-      </Tab>
-      <Tab fx:id="tabEmployee" text="Nhân viên">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-   </tabs>
-</JFXTabPane>
+<StackPane fx:id="root" prefHeight="713.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.SettingController">
+   <children>
+      <AnchorPane prefHeight="755.0" prefWidth="868.0" styleClass="tabpage" stylesheets="@../../css/tab.css">
+         <children>
+            <TableView fx:id="tbSavingType" layoutX="41.0" layoutY="80.0" prefHeight="560.0" prefWidth="804.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="23.0">
+               <stylesheets>
+                  <URL value="@../../css/table.css" />
+                  <URL value="@../../css/setting_style/table_style.css" />
+               </stylesheets></TableView>
+            <JFXButton fx:id="btnAddSavingType" layoutX="741.0" layoutY="21.0" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Thêm mới" textFill="WHITE" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="21.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

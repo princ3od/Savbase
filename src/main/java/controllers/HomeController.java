@@ -23,6 +23,7 @@ import utils.AppDialog;
 import utils.SnackBarUtils;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class HomeController extends Navigable {
     @FXML
@@ -128,14 +129,12 @@ public class HomeController extends Navigable {
         timeline.play();
     }
 
-    public void btnViewInfoOnClicked(MouseEvent mouseEvent) {
-
-    }
 
     public void onViewInfo(ActionEvent actionEvent) throws Exception {
-        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_ACCOUNT, "Thông tin nhân viên", "Nút mtk");
-        String result = dialog.showAndWait();
-        // Run after dialog closed
-        SnackBarUtils.getInstance().show(root, "Thêm thành công!");
+        System.out.println("===================");
+       System.out.println(AppStore.getCurrentAccount());
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_EMPLOYEE_INFO,null,AppStore.getCurrentAccount());
+        dialog.show();
+
     }
 }

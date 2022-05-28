@@ -31,5 +31,7 @@ public interface ScenePaths {
     interface DialogPaths {
         String VIEW_ACCOUNT = "/views/dialogs/view_account_dialog.fxml";
         String ADD_ACCOUNT = "/views/dialogs/add_account_dialog.fxml";
+
+        String VIEW_EMPLOYEE_INFO ="/views/dialogs/employee_info_dialog.fxml";
     }
 }

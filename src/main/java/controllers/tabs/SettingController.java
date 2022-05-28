@@ -1,58 +1,61 @@
 package controllers.tabs;
-
-import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXProgressBar;
 import command.GetAllSavingsTypeCommand;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.StackPane;
-import javafx.util.Callback;
-import models.SavingType;
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
+import models.SavingAccount;
+import models.SavingType;
+import javafx.util.Callback;
 
 import java.util.ArrayList;
 
 public class SettingController {
+
     @FXML
-    public TableColumn<SavingType,String> typeSavingCol;
+    private StackPane root;
+
     @FXML
-    public TableColumn<SavingType,Integer> tenorCol;
+    private TableView<SavingType> tbSavingType = new TableView<SavingType>();
+
     @FXML
-    public TableColumn<SavingType,Double> interestRateCol;
+    private TableColumn<SavingType, String> savingType = new TableColumn<>("Loại sổ");
     @FXML
-    public TableColumn<SavingType,Integer> minSendingDateCol;
+    private TableColumn<SavingType, Integer> tennor = new TableColumn<>("Kỳ hạn");
     @FXML
-    public TableColumn<SavingType,String> ruleCol;
+    private TableColumn<SavingType, Double> interestRate = new TableColumn<>("Lãi xuất");
+    @FXML
+    private TableColumn<SavingType, Integer> minSendingDate = new TableColumn<>("Số ngày gửi tối thiểu");
+    @FXML
+    private TableColumn<SavingType, String> rule = new TableColumn<>("Quy định rút tiền");
+
+    @FXML
+    private JFXButton btnAddSavingType;
+
+    @FXML
+    private JFXProgressBar savingTypeProgressBar;
+
+    //Logic
     private GetAllSavingsTypeCommand getAllSavingsTypeCommand;
-    @FXML
-    private Tab tabTypeSaveMoney;
-    @FXML
-    private TableView <SavingType>tbSavingTypes;
-    //
-    @FXML
-    private Tab tabOtherInfo;
-    @FXML
-    private Tab tabEmployee;
-    @FXML
-    private JFXTabPane tabSettingPanel;
-    private  int  _currentTab = 0;
 
 
     @FXML
     void initialize(){
-        typeSavingCol.setCellValueFactory(new PropertyValueFactory<>("nameSavingType"));
-        tenorCol.setCellValueFactory(new PropertyValueFactory<>("tenor"));
-        interestRateCol.setCellValueFactory(new PropertyValueFactory<>("interestRate"));
-        minSendingDateCol.setCellValueFactory(new PropertyValueFactory<>("minSendingDate"));
-        ruleCol.setCellValueFactory(new PropertyValueFactory<>("rule"));
+        savingType.setCellValueFactory(new PropertyValueFactory<>("nameSavingType"));
+        savingType.setPrefWidth(200);
+        tennor.setCellValueFactory(new PropertyValueFactory<>("tenor"));
+        tennor.setPrefWidth(200);
+        interestRate.setCellValueFactory(new PropertyValueFactory<>("interestRate"));
+        interestRate.setPrefWidth(200);
+        minSendingDate.setCellValueFactory(new PropertyValueFactory<>("minSendingDate"));
+        minSendingDate.setPrefWidth(180);
+        rule.setCellValueFactory(new PropertyValueFactory<>("rule"));
+        rule.setPrefWidth(200);
+        tbSavingType.getColumns().clear();
+        tbSavingType.getColumns().addAll(savingType,tennor, interestRate, minSendingDate,rule);
         getAllSavingsTypeCommand = new GetAllSavingsTypeCommand();
         getAllSavingsTypeCommand.setOnSucceed(
                 new Callback() {
@@ -69,8 +72,9 @@ public class SettingController {
     }
 
     private  void showSavingTypeResult(ArrayList<SavingType> savingTypes){
+        System.out.println("savingTypes");
         for(var type:savingTypes){
-            tbSavingTypes.getItems().add(type);
+            tbSavingType.getItems().add(type);
         }
     }
 

@@ -30,7 +30,6 @@
                                         <Image url="@../images/user.png" />
                                     </image>
                                 </ImageView>
-                                <JFXButton fx:id="btnViewInfo" layoutX="27.0" layoutY="120.0" minHeight="0.0" minWidth="0.0" onMouseClicked="#btnViewInfoOnClicked" prefHeight="39.0" prefWidth="196.0" styleClass="flat-button" stylesheets="@../css/button.css" text="Xem thông tin">
                                 <JFXButton fx:id="btnViewInfo" onAction="#onViewInfo" layoutX="27.0" layoutY="120.0" minHeight="0.0" minWidth="0.0" prefHeight="39.0" prefWidth="196.0" styleClass="flat-button" stylesheets="@../css/button.css" text="Xem thông tin">
                                     <font>
                                         <Font name="Segoe UI Semibold" size="16.0" />
@@ -41,7 +40,6 @@
                                         <Font name="Segoe UI Semibold" size="16.0" />
                                     </font>
                                 </JFXButton>
-                                <Separator layoutX="25.0" layoutY="108.0" prefWidth="200.0" />
                                 <Separator layoutX="25.0" layoutY="219.0" prefWidth="200.0" />
                                 <JFXButton fx:id="btnExpand" contentDisplay="GRAPHIC_ONLY" layoutX="209.0" layoutY="60.0" onMouseClicked="#onExpand" prefHeight="32.0" prefWidth="32.0" ripplerFill="#e0e0e0" text="Open">
                                     <graphic>

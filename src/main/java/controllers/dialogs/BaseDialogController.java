@@ -26,6 +26,12 @@ public abstract class BaseDialogController {
 
     public abstract void onSetParam();
 
+    public  void onClose(){
+       if(dialog!=null){
+           dialog.close();
+       }
+    }
+
     Object param;
 
 }

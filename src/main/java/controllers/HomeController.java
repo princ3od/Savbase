@@ -21,6 +21,7 @@ import navigation.ScenePaths;
 import stores.AppStore;
 import utils.AppDialog;
 import utils.SnackBarUtils;
+import utils.Utils;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -81,6 +82,7 @@ public class HomeController extends Navigable {
         btnSetting.setVisible(AppStore.getCurrentAccount().isAdmin());
         push(ScenePaths.TabPagePaths.ACCOUNTS);
         btnAccounts.getStyleClass().setAll("tab-selected");
+        Utils.setRoot(root);
     }
 
     public void onExpand(MouseEvent mouseEvent) {

@@ -16,7 +16,7 @@
                   <URL value="@../../css/table.css" />
                   <URL value="@../../css/setting_style/table_style.css" />
                </stylesheets></TableView>
-            <JFXButton fx:id="btnAddSavingType" layoutX="741.0" layoutY="21.0" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Thêm mới" textFill="WHITE" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="21.0">
+            <JFXButton fx:id="btnAddSavingType" layoutX="741.0" layoutY="21.0" onMouseClicked="#onAddSavingType" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Thêm mới" textFill="WHITE" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="21.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

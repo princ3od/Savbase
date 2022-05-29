@@ -33,5 +33,6 @@ public interface ScenePaths {
         String ADD_ACCOUNT = "/views/dialogs/add_account_dialog.fxml";
 
         String VIEW_EMPLOYEE_INFO ="/views/dialogs/employee_info_dialog.fxml";
+        String ADD_NEW_SAVING_TYPE="/views/dialogs/add_saving_type.fxml";
     }
 }

@@ -1,5 +1,7 @@
 package utils;
 
+import javafx.scene.layout.StackPane;
+
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
@@ -20,4 +22,17 @@ public class Utils {
         }
     };
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    public  static java.sql.Date untilDateToSqlDate(java.util.Date rawDate){
+        return  new java.sql.Date(rawDate.getTime());
+    }
+
+    private  static  StackPane _stackPane;
+
+    public  static StackPane getRoot(){
+        return  _stackPane;
+    }
+    public  static void  setRoot(StackPane stackPane){
+        _stackPane = stackPane;
+    }
 }

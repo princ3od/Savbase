@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.sql.rowset.CachedRowSet;
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class SavingTypeService {
@@ -34,5 +35,18 @@ public class SavingTypeService {
         ObservableList<String> result = FXCollections.observableArrayList(savingTypes);
         return result;
 
+    }
+
+    public  static  void createNewSavingType(
+            String name, Integer tenor, Double interateRate, Date activeDate, Integer minSendingDate, String rule
+    ) throws  Exception{
+            try{
+                ExecuteQuery.executeReader("{CALL Savbase_AddNewSavingType(?, ?, ?, ?, ?, ?)}"
+                        , new Object[]{name, tenor, interateRate, activeDate,minSendingDate,rule});
+            }
+            catch (Exception e){
+                System.out.println("<================================================>");
+                System.out.println(e.getMessage());
+            }
     }
 }

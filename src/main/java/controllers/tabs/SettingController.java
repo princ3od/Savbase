@@ -6,10 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import models.SavingAccount;
 import models.SavingType;
 import javafx.util.Callback;
+import navigation.ScenePaths;
+import stores.AppStore;
+import utils.AppDialog;
 
 import java.util.ArrayList;
 
@@ -79,4 +83,8 @@ public class SettingController {
     }
 
 
+    public void onAddSavingType(MouseEvent mouseEvent) throws Exception {
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.ADD_NEW_SAVING_TYPE,null, null);
+        dialog.show();
+    }
 }

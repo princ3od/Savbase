@@ -1,6 +1,7 @@
 package controllers.tabs;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
+import command.DelSavingTypeCommand;
 import command.GetAllSavingsTypeCommand;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -14,6 +15,7 @@ import javafx.util.Callback;
 import navigation.ScenePaths;
 import stores.AppStore;
 import utils.AppDialog;
+import utils.SnackBarUtils;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,8 @@ public class SettingController<T> {
 
     @FXML
     private JFXProgressBar savingTypeProgressBar;
+    @FXML
+    private JFXButton btnDelSavingType;
 
     //Logic
     private GetAllSavingsTypeCommand getAllSavingsTypeCommand;
@@ -94,5 +98,39 @@ public class SettingController<T> {
                 }
         );
         getAllSavingsTypeCommand.execute();
+    }
+
+
+    @FXML
+    void onDelSavingType(MouseEvent event) {
+       SavingType selectedSavingType =  tbSavingType.getSelectionModel().getSelectedItem();
+       System.out.println(selectedSavingType);
+        DelSavingTypeCommand delSavingTypeCommand = new DelSavingTypeCommand(selectedSavingType);
+        delSavingTypeCommand.setOnSucceed(
+                new Callback() {
+                    @Override
+                    public Object call(Object param) {
+                        onDelSavingSuccess();
+                        return null;
+                    }
+                }
+        );
+        delSavingTypeCommand.setOnFail(
+                new Callback() {
+                    @Override
+                    public Object call(Object param) {
+                        onDelSavingFail((Exception) delSavingTypeCommand.getException());
+                        return null;
+                    }
+                }
+        );
+        delSavingTypeCommand.execute();
+    }
+
+    void onDelSavingSuccess(){
+        SnackBarUtils.getInstance().show(root, "Xoá thành công");
+    }
+    void onDelSavingFail(Exception ex){
+        SnackBarUtils.getInstance().show(root, "Xoá không thành công \n"+ ex.getMessage());
     }
 }

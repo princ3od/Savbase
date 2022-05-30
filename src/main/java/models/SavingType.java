@@ -76,4 +76,9 @@ public class SavingType {
     public void setNameSavingType(String _nameSavingType) {
         this._nameSavingType = _nameSavingType;
     }
+
+    @Override
+    public String toString() {
+        return String.format("_id=%s;_nameSavingType=%s;_tenor=%s;_interestRate=%s;", _id, _nameSavingType, _tenor, _interestRate);
+    }
 }

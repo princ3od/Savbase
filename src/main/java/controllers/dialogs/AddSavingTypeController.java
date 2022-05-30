@@ -16,7 +16,7 @@ import utils.Utils;
 
 import java.util.Date;
 
-public class AddSavingType  extends  BaseDialogController{
+public class AddSavingTypeController  extends  BaseDialogController{
     private AddNewSavingTypeCommand addNewSavingTypeCommand;
     @FXML
     private JFXTextField txtSavingName;

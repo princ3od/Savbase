@@ -8,8 +8,8 @@ import service.SavingTypeService;
 
 import java.sql.Date;
 
-public class AddNewSavingTypeCommand  extends  BaseCommand{
-    public  AddNewSavingTypeCommand(String name, Integer tenor, Double interateRate, Date activeDate, Integer minSendingDate, String rule){
+public class AddNewSavingTypeCommand extends BaseCommand {
+    public AddNewSavingTypeCommand(String name, Integer tenor, Double interateRate, Date activeDate, Integer minSendingDate, String rule) {
         task = new Task<>() {
             @Override
             protected Object call() throws Exception {

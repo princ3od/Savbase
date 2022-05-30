@@ -25,6 +25,7 @@ public class SavingTypeService {
         }
         return savingTypes;
     }
+
     public static ObservableList<String> getAll() throws Exception {
         CachedRowSet data = ExecuteQuery.executeReader("{CALL Savbase_LoadSavingsType()}", null);
         ArrayList<String> savingTypes = new ArrayList<>();
@@ -37,16 +38,24 @@ public class SavingTypeService {
 
     }
 
-    public  static  void createNewSavingType(
+    public static void createNewSavingType(
             String name, Integer tenor, Double interateRate, Date activeDate, Integer minSendingDate, String rule
-    ) throws  Exception{
-            try{
-                ExecuteQuery.executeReader("{CALL Savbase_AddNewSavingType(?, ?, ?, ?, ?, ?)}"
-                        , new Object[]{name, tenor, interateRate, activeDate,minSendingDate,rule});
-            }
-            catch (Exception e){
-                System.out.println("<================================================>");
-                System.out.println(e.getMessage());
-            }
+    ) throws Exception {
+        try {
+            ExecuteQuery.executeReader("{CALL Savbase_AddNewSavingType(?, ?, ?, ?, ?, ?)}"
+                    , new Object[]{name, tenor, interateRate, activeDate, minSendingDate, rule});
+        } catch (Exception ex) {
+            printException(ex);
+        }
+    }
+
+    public static void delSavingType(SavingType typeObject) throws Exception {
+
+        var result = ExecuteQuery.executeUpdate("{CALL SAVBASE_DelSavingType(?)}", new Object[]{typeObject.getId()});
+    }
+
+    private static void printException(Exception e) {
+        System.out.println("<================================================>");
+        System.out.println(e.getMessage());
     }
 }

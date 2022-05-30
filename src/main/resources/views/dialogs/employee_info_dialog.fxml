@@ -1,42 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="633.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dialogs.ViewEmployeeController">
+<AnchorPane prefHeight="553.0" prefWidth="434.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dialogs.ViewEmployeeController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="199.0" layoutY="14.0" text="Thông tin nhân viên">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="28.0" layoutY="126.0" text="Mã nhân viên" />
-      <Label layoutX="28.0" layoutY="186.0" text="Chức vụ" />
-      <Label layoutX="28.0" layoutY="246.0" text="Họ và tên" />
-      <Label layoutX="28.0" layoutY="306.0" text="CMND/CCCD" />
-      <Label layoutX="28.0" layoutY="366.0" text="Giới tính" />
-      <Label layoutX="28.0" layoutY="426.0" text="Số điện thoại" />
-      <Label layoutX="28.0" layoutY="486.0" text="Email" />
-      <Label layoutX="28.0" layoutY="546.0" text="Địa chỉ" />
-      <JFXTextField fx:id="txtStaffId" layoutX="228.0" layoutY="106.0" prefHeight="30.0" prefWidth="200.0" />
-      <JFXTextField fx:id="txtPosition" layoutX="228.0" layoutY="166.0" prefHeight="30.0" prefWidth="200.0" />
-      <JFXTextField fx:id="txtEmail" layoutX="228.0" layoutY="466.0" prefHeight="30.0" prefWidth="200.0" />
-      <JFXTextField fx:id="txtPhoneNum" layoutX="228.0" layoutY="406.0" prefHeight="30.0" prefWidth="200.0" />
-      <JFXTextField fx:id="txtGender" layoutX="228.0" layoutY="346.0" prefHeight="30.0" prefWidth="100.0" />
-      <JFXTextField fx:id="txtID" layoutX="228.0" layoutY="286.0" prefHeight="30.0" prefWidth="200.0" />
-      <JFXTextField fx:id="txtStaffName" layoutX="228.0" layoutY="226.0" prefHeight="30.0" prefWidth="200.0" />
-      <Label layoutX="344.0" layoutY="366.0" text="Ngày sinh" />
-      <JFXDatePicker fx:id="dpBornDate" defaultColor="#0f4641" layoutX="443.0" layoutY="361.0" prefHeight="33.0" prefWidth="178.0" style="-fx-background-color: white; -fx-border-radius: 30; -fx-border-color: black;">
-         <padding>
-            <Insets left="30.0" />
-         </padding>
-      </JFXDatePicker>
-      <JFXTextField fx:id="txtAddress" layoutX="228.0" layoutY="526.0" prefHeight="30.0" prefWidth="200.0" />
-      <JFXButton fx:id="btnClose" layoutX="462.0" layoutY="572.0" onMouseClicked="#onClose" prefHeight="47.0" prefWidth="134.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;" text="Đóng" />
+      <Label layoutX="55.0" layoutY="14.0" text="Mã nhân viên" />
+      <Label layoutX="55.0" layoutY="74.0" text="Chức vụ" />
+      <Label layoutX="55.0" layoutY="134.0" text="Họ và tên" />
+      <Label layoutX="55.0" layoutY="194.0" text="CMND/CCCD" />
+      <Label layoutX="55.0" layoutY="254.0" text="Giới tính" />
+      <Label layoutX="55.0" layoutY="314.0" text="Số điện thoại" />
+      <Label layoutX="55.0" layoutY="374.0" text="Email" />
+      <Label layoutX="55.0" layoutY="434.0" text="Địa chỉ" />
+      <JFXTextField fx:id="txtStaffId" editable="false" focusColor="#036666" layoutX="153.0" layoutY="6.0" prefHeight="30.0" prefWidth="236.0" />
+      <JFXTextField fx:id="txtPosition" editable="false" focusColor="#036666" layoutX="153.0" layoutY="66.0" prefHeight="30.0" prefWidth="236.0" />
+      <JFXTextField fx:id="txtEmail" editable="false" focusColor="#036666" layoutX="153.0" layoutY="366.0" prefHeight="30.0" prefWidth="236.0" />
+      <JFXTextField fx:id="txtPhoneNum" editable="false" focusColor="#036666" layoutX="153.0" layoutY="306.0" prefHeight="30.0" prefWidth="236.0" />
+      <JFXTextField fx:id="txtGender" editable="false" focusColor="#036666" layoutX="153.0" layoutY="246.0" prefHeight="30.0" prefWidth="53.0" />
+      <JFXTextField fx:id="txtID" editable="false" focusColor="#036666" layoutX="153.0" layoutY="186.0" prefHeight="30.0" prefWidth="236.0" />
+      <JFXTextField fx:id="txtStaffName" editable="false" focusColor="#036666" layoutX="153.0" layoutY="126.0" prefHeight="30.0" prefWidth="236.0" />
+      <Label layoutX="227.0" layoutY="254.0" text="Ngày sinh" />
+      <JFXTextField fx:id="txtAddress" editable="false" focusColor="#036666" layoutX="153.0" layoutY="426.0" prefHeight="30.0" prefWidth="236.0" />
+      <JFXButton fx:id="btnClose" layoutX="175.0" layoutY="479.0" onMouseClicked="#onClose" prefHeight="47.0" prefWidth="134.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;" text="Đóng" />
+      <JFXTextField fx:id="txtBornDate" editable="false" focusColor="#036666" layoutX="298.0" layoutY="246.0" prefHeight="30.0" prefWidth="92.0" />
    </children>
+   <padding>
+      <Insets left="32.0" right="32.0" />
+   </padding>
 </AnchorPane>

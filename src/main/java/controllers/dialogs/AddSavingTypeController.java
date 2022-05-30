@@ -4,14 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import command.AddNewSavingTypeCommand;
-import command.AddSavingAccountCommand;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import models.SavingType;
-import models.builder.SavingBuilder;
 import utils.SnackBarUtils;
 import utils.Utils;
 
@@ -40,9 +39,11 @@ public class AddSavingType  extends  BaseDialogController{
     @FXML
     private JFXTextField txtInterestRate;
 
+    private TableView<SavingType> savingTypeTableView;
+
     @Override
     public void onSetParam() {
-
+        savingTypeTableView = (TableView<SavingType>)getParam();
     }
     @FXML
     void initialize() {
@@ -70,6 +71,8 @@ public class AddSavingType  extends  BaseDialogController{
                         @Override
                         public Object call(Object param) {
                             SnackBarUtils.getInstance().show(Utils.getRoot(), "Thêm thành công");
+                            Boolean result = true;
+                            setResult(result);
                             onClose();
                            return  null;
                         }

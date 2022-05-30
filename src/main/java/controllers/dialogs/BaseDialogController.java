@@ -2,7 +2,7 @@ package controllers.dialogs;
 
 import utils.AppDialog;
 
-public abstract class BaseDialogController {
+public abstract class BaseDialogController<T> {
 
     // Dialog shows this scene
     protected AppDialog dialog;
@@ -32,6 +32,8 @@ public abstract class BaseDialogController {
        }
     }
 
+    public void setResult(T result){
+        dialog.setResult(result);
+    }
     Object param;
-
 }

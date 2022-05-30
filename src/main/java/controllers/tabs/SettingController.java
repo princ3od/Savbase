@@ -17,7 +17,7 @@ import utils.AppDialog;
 
 import java.util.ArrayList;
 
-public class SettingController {
+public class SettingController<T> {
 
     @FXML
     private StackPane root;
@@ -60,6 +60,27 @@ public class SettingController {
         rule.setPrefWidth(200);
         tbSavingType.getColumns().clear();
         tbSavingType.getColumns().addAll(savingType,tennor, interestRate, minSendingDate,rule);
+        loadData();
+    }
+
+    private  void showSavingTypeResult(ArrayList<SavingType> savingTypes){
+        for(var type:savingTypes){
+            tbSavingType.getItems().add(type);
+        }
+    }
+
+
+    public void onAddSavingType(MouseEvent mouseEvent) throws Exception {
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.ADD_NEW_SAVING_TYPE,null, tbSavingType);
+        T rawResult =  (T) dialog.showAndWait();
+        boolean result = (Boolean) rawResult;
+        if(result==true){
+            loadData();
+        }
+    }
+
+    private void loadData(){
+        tbSavingType.getItems().clear();
         getAllSavingsTypeCommand = new GetAllSavingsTypeCommand();
         getAllSavingsTypeCommand.setOnSucceed(
                 new Callback() {
@@ -73,18 +94,5 @@ public class SettingController {
                 }
         );
         getAllSavingsTypeCommand.execute();
-    }
-
-    private  void showSavingTypeResult(ArrayList<SavingType> savingTypes){
-        System.out.println("savingTypes");
-        for(var type:savingTypes){
-            tbSavingType.getItems().add(type);
-        }
-    }
-
-
-    public void onAddSavingType(MouseEvent mouseEvent) throws Exception {
-        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.ADD_NEW_SAVING_TYPE,null, null);
-        dialog.show();
     }
 }

@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controllers.SplashController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SplashController">
     <padding>
-        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
     </padding>
     <children>
-        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="500.0" layoutY="257.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="500.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../images/logo.png"/>
+                <Image url="@../images/logo.png" />
             </image>
         </ImageView>
-        <MFXProgressSpinner fx:id="spinner" layoutX="581.0" layoutY="577.0" radius="16.0" styleClass="progress-bar"
-                            stylesheets="@../css/progressbar.css"/>
-        <Label fx:id="lbLoading" layoutX="9.0" layoutY="650.0" prefHeight="23.0" prefWidth="1182.0"
-               style="-fx-alignment: center;" text="Savbase đang tải dữ liệu..." textAlignment="CENTER">
+        <MFXProgressSpinner fx:id="spinner" layoutX="581.0" layoutY="577.0" radius="16.0" styleClass="progress-bar" stylesheets="@../css/progressbar.css" />
+        <Label fx:id="lbLoading" layoutX="9.0" layoutY="650.0" prefHeight="23.0" prefWidth="1182.0" style="-fx-alignment: center;" text="Savbase đang tải dữ liệu..." textAlignment="CENTER">
             <font>
-                <Font name="Segoe UI" size="18.0"/>
+                <Font name="Segoe UI" size="18.0" />
             </font>
         </Label>
-        <JFXButton fx:id="btnRetry" onAction="#onRetry" alignment="CENTER" defaultButton="true" layoutX="509.0"
-                   layoutY="518.0" prefHeight="39.0" prefWidth="183.0" styleClass="flat-button"
-                   stylesheets="@../css/button.css" text="Thử lại"/>
+        <JFXButton fx:id="btnRetry" alignment="CENTER" defaultButton="true" layoutX="509.0" layoutY="518.0" onAction="#onRetry" prefHeight="39.0" prefWidth="183.0" styleClass="flat-button" stylesheets="@../css/button.css" text="Thử lại" />
     </children>
 </AnchorPane>

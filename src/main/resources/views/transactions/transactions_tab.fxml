@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:controller="controllers.tabs.TransactionsTabController" prefHeight="400.0" prefWidth="600.0" styleClass="tabpage" stylesheets="@../../css/tab.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="453.0" prefWidth="600.0" style="-fx-background-color: white;" styleClass="tabpage" stylesheets="@../../css/tab.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.TransactionsTabController">
     <children>
-        <CheckBox layoutX="246.0" layoutY="175.0" mnemonicParsing="false" text="Giao dịch" />
+      <Label layoutX="149.0" layoutY="103.0" text="Số tài khoản" />
+      <Label layoutX="149.0" layoutY="146.0" text="Họ và tên" />
+      <JFXTextField fx:id="txtHoTen" layoutX="271.0" layoutY="141.0" prefHeight="31.0" prefWidth="227.0" />
+      <Label layoutX="149.0" layoutY="199.0" text="Số tiền giao dịch" />
+      <JFXTextField fx:id="txtSoTienGiaoDich" layoutX="271.0" layoutY="194.0" prefHeight="31.0" prefWidth="227.0" />
+      <Label layoutX="149.0" layoutY="258.0" text="Ngày giao dịch" />
+      <JFXDatePicker fx:id="dpNgayGiaoDich" defaultColor="#0f4641" layoutX="271.0" layoutY="252.0" prefHeight="33.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-radius: 30; -fx-border-color: black;">
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+      </JFXDatePicker>
+      <ComboBox fx:id="cboSTK" layoutX="267.0" layoutY="95.0" prefHeight="38.0" prefWidth="227.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-background-color: white;" />
+      <JFXButton fx:id="btnTienClick" layoutX="189.0" layoutY="381.0"  prefHeight="47.0" prefWidth="281.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;" text="Gửi tiền" />
+      <CheckBox fx:id="ckIn" layoutX="145.0" layoutY="313.0" mnemonicParsing="false" text="In hoá đơn" />
+      <RadioButton fx:id="rdbGui" layoutX="245.0" layoutY="24.0" onMouseClicked="#onClickRadioGuiTien" mnemonicParsing="false" text="Gửi tiền" />
+      <RadioButton fx:id="rdbRut" layoutX="366.0" layoutY="24.0" onMouseClicked="#onClickRadioRutTien" mnemonicParsing="false" text="Rút tiền" />
+      <CheckBox fx:id="ckRutTien" layoutX="414.0" layoutY="313.0" mnemonicParsing="false" text="Rút tiền" />
     </children>
 </AnchorPane>

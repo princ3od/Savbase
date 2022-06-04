@@ -3,8 +3,10 @@ package utils;
 import javafx.scene.layout.StackPane;
 
 import java.text.Format;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class Utils {
 
@@ -23,6 +25,8 @@ public class Utils {
         }
     };
     public static Format dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+
+    public static NumberFormat curencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
     public static java.sql.Date untilDateToSqlDate(java.util.Date rawDate) {
         return new java.sql.Date(rawDate.getTime());

@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import models.SavingAccount;
 import navigation.ScenePaths;
 import utils.AppDialog;
+import utils.Utils;
 
 public class ViewAccountController extends BaseDialogController {
 
@@ -42,20 +43,6 @@ public class ViewAccountController extends BaseDialogController {
     @FXML
     private JFXTextField txtSoDu;
 
-    public void initialize() {
-        System.out.println("cc intialize");
-    }
-
-    public ViewAccountController() {
-        System.out.println("cc constructor");
-    }
-
-    public void onAction(ActionEvent actionEvent) throws Exception {
-        System.out.println("cc");
-        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_ACCOUNT, "Thông tin nhân viên", "Nút mtk");
-        String result = dialog.showAndWait(false);
-    }
-
     @Override
     public void onSetParam() {
         SavingAccount savingAccount = (SavingAccount) getParam();
@@ -63,12 +50,11 @@ public class ViewAccountController extends BaseDialogController {
         txtDiaChi.setText(savingAccount.getAddress());
         txtEmail.setText(savingAccount.getEmail());
         txtHoTen.setText(savingAccount.getName());
-        txtNgayMo.setText(savingAccount.getOpenDate().toString());
-        txtSoDu.setText(savingAccount.getSurplus() + "");
+        txtNgayMo.setText(Utils.dateFormatter.format(savingAccount.getOpenDate()));
+        txtSoDu.setText(Utils.curencyFormat.format(savingAccount.getSurplus()));
         lblGioiTinh.setText(savingAccount.getSex());
         lblLoaiSo.setText(savingAccount.getSavingAccountType());
         lblSDT.setText(savingAccount.getPhoneNumber());
         lblSTK.setText(savingAccount.getId() + "");
-
     }
 }

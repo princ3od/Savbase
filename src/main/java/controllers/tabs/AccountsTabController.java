@@ -1,25 +1,24 @@
 package controllers.tabs;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXProgressBar;
 import command.SavingAccountCommand;
+import io.github.palexdev.materialfx.controls.MFXProgressBar;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import models.SavingAccount;
 import navigation.ScenePaths;
 import utils.AppDialog;
 import utils.SnackBarUtils;
+import utils.Utils;
 
-import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -43,23 +42,26 @@ public class AccountsTabController {
     private TableColumn<SavingAccount, String> nationalIdColumn = new TableColumn<>("CMND/CCCD");
 
     @FXML
-    private TableColumn<SavingAccount, Double> surplusColumn = new TableColumn<>("Số dư");
+    private TableColumn<SavingAccount, String> surplusColumn = new TableColumn<>("Số dư");
 
     @FXML
-    private TableColumn<SavingAccount, String> typeColumn = new TableColumn<>("Loại tài khoản");;
+    private TableColumn<SavingAccount, String> typeColumn = new TableColumn<>("Loại tài khoản");
+    ;
 
     @FXML
     private TextField txtSearch;
 
     @FXML
-    private JFXProgressBar progressBar;
+    private MFXProgressBar progressBar;
 
     void setOnFetching(boolean isLoading) {
         progressBar.setVisible(isLoading);
+        tbvSavingAccount.setVisible(!isLoading);
     }
 
     @FXML
     void initialize() {
+        setOnFetching(true);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         nameColumn.setPrefWidth(200);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -69,9 +71,15 @@ public class AccountsTabController {
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("savingAccountType"));
         typeColumn.setPrefWidth(150);
         surplusColumn.setCellValueFactory(new PropertyValueFactory<>("surplus"));
+        surplusColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SavingAccount, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<SavingAccount, String> param) {
+                return new SimpleStringProperty(Utils.curencyFormat.format(param.getValue().getSurplus()));
+            }
+        });
         surplusColumn.setPrefWidth(200);
         tbvSavingAccount.getColumns().clear();
-        tbvSavingAccount.getColumns().addAll(nameColumn,idColumn, nationalIdColumn, typeColumn, surplusColumn);
+        tbvSavingAccount.getColumns().addAll(nameColumn, idColumn, nationalIdColumn, typeColumn, surplusColumn);
 
         tbvSavingAccount.getColumns().forEach(new Consumer<TableColumn<SavingAccount, ?>>() {
             @Override
@@ -98,7 +106,6 @@ public class AccountsTabController {
             @Override
             public Object call(Object param) {
                 setOnFetching(false);
-                System.out.print(command.getResult());
                 tbvSavingAccount.setItems((ObservableList<SavingAccount>) command.getResult());
                 return null;
             }
@@ -119,8 +126,7 @@ public class AccountsTabController {
                 tbvSavingAccount.getSelectionModel().clearSelection();
                 if (newValue.isEmpty()) {
                     tbvSavingAccount.setItems((ObservableList<SavingAccount>) command.getResult());
-                }
-                else {
+                } else {
                     tbvSavingAccount.setItems(((ObservableList<SavingAccount>) command.getResult()).filtered(new Predicate<SavingAccount>() {
                         @Override
                         public boolean test(SavingAccount savingAccount) {
@@ -144,7 +150,6 @@ public class AccountsTabController {
             e.printStackTrace();
         }
     }
-
 
 
 }

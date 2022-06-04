@@ -1,5 +1,6 @@
 package command;
 
+import constants.Constants;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -15,6 +16,7 @@ public class SavingAccountCommand extends BaseCommand  {
         task = new Task<ObservableList<SavingAccount>>() {
             @Override
             protected ObservableList<SavingAccount> call() throws Exception {
+                Thread.sleep(Constants.DEFAULT_COMMAND_DELAY_TIME);
                 ObservableList<SavingAccount> savingAccounts = SavingAccountService.getAll();
                 return savingAccounts;
             }

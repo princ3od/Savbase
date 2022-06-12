@@ -101,9 +101,9 @@ public class AppDialog<T> {
         if (headingText != null) {
             Label lbHeader = new Label(headingText);
             lbHeader.setStyle("-fx-font-size: 24");
-            header.setLeft(lbHeader);
+            header.setCenter(lbHeader);
         }
-        header.setPadding(new Insets(8));
+        header.setPadding(new Insets(0, 0, -32, 0));
         header.setRight(closeButton);
         layout.setHeading(header);
     }

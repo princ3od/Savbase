@@ -2,6 +2,7 @@ package controllers;
 
 import com.jfoenix.controls.*;
 import constants.Constants;
+import constants.Strings;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -133,10 +134,7 @@ public class HomeController extends Navigable {
 
 
     public void onViewInfo(ActionEvent actionEvent) throws Exception {
-        System.out.println("===================");
-       System.out.println(AppStore.getCurrentAccount());
-        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_EMPLOYEE_INFO,null,AppStore.getCurrentAccount());
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.VIEW_EMPLOYEE_INFO, Strings.VIEW_EMPLOYEE_INFO_DIALOG_TITLE, AppStore.getCurrentAccount());
         dialog.show();
-
     }
 }

@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import java.net.URL?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root" prefHeight="713.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.SettingController">
+
+<AnchorPane prefHeight="755.0" prefWidth="868.0" styleClass="tabpage" stylesheets="@../../css/tab.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SettingTabController">
    <children>
-      <AnchorPane prefHeight="755.0" prefWidth="868.0" styleClass="tabpage" stylesheets="@../../css/tab.css">
+      <Pane prefHeight="54.0" prefWidth="868.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <TableView fx:id="tbSavingType" layoutX="41.0" layoutY="80.0" prefHeight="560.0" prefWidth="804.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="23.0">
-               <stylesheets>
-                  <URL value="@../../css/table.css" />
-                  <URL value="@../../css/setting_style/table_style.css" />
-               </stylesheets></TableView>
-            <JFXButton fx:id="btnAddSavingType" layoutX="736.0" layoutY="21.0" onMouseClicked="#onAddSavingType" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Thêm mới" textFill="WHITE" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="20.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+            <JFXButton fx:id="btnSavingTypes" alignment="CENTER" layoutX="14.0" onAction="#onChangeTab" prefHeight="55.0" prefWidth="124.0" styleClass="horizontal-tab" stylesheets="@../../css/tab.css" text="Loại tiết kiệm" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
             </JFXButton>
-            <JFXButton fx:id="btnDelSavingType" layoutX="731.0" layoutY="14.0" onMouseClicked="#onDelSavingType" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Xóa" textFill="WHITE" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+            <JFXButton fx:id="btnOtherParams" alignment="CENTER" layoutX="138.0" onAction="#onChangeTab" prefHeight="55.0" prefWidth="130.0" styleClass="horizontal-tab" stylesheets="@../../css/tab.css" text="Thông số khác" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnEmployees" alignment="CENTER" layoutX="268.0" onAction="#onChangeTab" prefHeight="55.0" prefWidth="102.0" styleClass="horizontal-tab" stylesheets="@../../css/tab.css" text="Nhân viên">
+               <font>
+                  <Font name="Segoe UI Semibold" size="16.0" />
+               </font>
             </JFXButton>
          </children>
-      </AnchorPane>
+      </Pane>
+      <BorderPane fx:id="pnSettingTabContent" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
    </children>
-</StackPane>
+</AnchorPane>

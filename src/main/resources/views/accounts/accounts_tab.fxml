@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXProgressBar?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableView?>
@@ -28,7 +28,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXProgressBar fx:id="progressBar" layoutX="39.0" layoutY="134.0" prefHeight="4.0" prefWidth="796.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" />
+            <MFXProgressBar fx:id="progressBar" layoutX="41.0" layoutY="136.0" prefHeight="6.0" prefWidth="804.0" />
          </children>
       </AnchorPane>
    </children>

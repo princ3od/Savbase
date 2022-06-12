@@ -74,7 +74,7 @@ public class AccountsTabController {
         surplusColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<SavingAccount, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<SavingAccount, String> param) {
-                return new SimpleStringProperty(Utils.curencyFormat.format(param.getValue().getSurplus()));
+                return new SimpleStringProperty(Utils.currencyFormat.format(param.getValue().getSurplus()));
             }
         });
         surplusColumn.setPrefWidth(200);

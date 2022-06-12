@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="root" prefHeight="713.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.SavingTypeController">
+   <children>
+      <AnchorPane prefHeight="755.0" prefWidth="868.0" styleClass="tabpage" stylesheets="@../../css/tab.css">
+         <children>
+            <TableView fx:id="tbSavingType" layoutX="41.0" layoutY="80.0" prefHeight="560.0" prefWidth="804.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="23.0">
+               <stylesheets>
+                  <URL value="@../../css/table.css" />
+                  <URL value="@../../css/setting_style/table_style.css" />
+               </stylesheets></TableView>
+            <JFXButton fx:id="btnAddSavingType" layoutX="736.0" layoutY="21.0" onMouseClicked="#onAddSavingType" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Thêm mới" textFill="WHITE" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="20.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnDelSavingType" layoutX="731.0" layoutY="14.0" onMouseClicked="#onDelSavingType" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Xóa" textFill="WHITE" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

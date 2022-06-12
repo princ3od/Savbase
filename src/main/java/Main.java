@@ -23,7 +23,6 @@ public class Main extends Application {
         stage.show();
         centerScreen(stage);
         Navigation.getInstance().setMainStage(stage);
-
     }
 
     public static void main(String[] args) {

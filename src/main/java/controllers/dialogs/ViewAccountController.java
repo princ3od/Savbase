@@ -1,14 +1,9 @@
 package controllers.dialogs;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import models.SavingAccount;
-import navigation.ScenePaths;
-import utils.AppDialog;
 import utils.Utils;
 
 public class ViewAccountController extends BaseDialogController {
@@ -51,7 +46,7 @@ public class ViewAccountController extends BaseDialogController {
         txtEmail.setText(savingAccount.getEmail());
         txtHoTen.setText(savingAccount.getName());
         txtNgayMo.setText(Utils.dateFormatter.format(savingAccount.getOpenDate()));
-        txtSoDu.setText(Utils.curencyFormat.format(savingAccount.getSurplus()));
+        txtSoDu.setText(Utils.currencyFormat.format(savingAccount.getSurplus()));
         lblGioiTinh.setText(savingAccount.getSex());
         lblLoaiSo.setText(savingAccount.getSavingAccountType());
         lblSDT.setText(savingAccount.getPhoneNumber());

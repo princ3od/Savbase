@@ -12,8 +12,8 @@ public class Utils {
 
     public static HashMap<Integer, String> decodePosition = new HashMap<Integer, String>() {
         {
-            put(1, "Nhân viên");
-            put(2, "Trưởng phòng");
+            put(1, "Quản lý");
+            put(2, "Nhân viên");
             put(3, "Admin");
         }
     };
@@ -26,7 +26,7 @@ public class Utils {
     };
     public static Format dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    public static NumberFormat curencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+    public static NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
     public static java.sql.Date untilDateToSqlDate(java.util.Date rawDate) {
         return new java.sql.Date(rawDate.getTime());

@@ -39,4 +39,9 @@ public class EmployeeService {
         ExecuteQuery.executeReader("{CALL Savbase_ModifyStaffInfo(?, ?, ?, ?, ?, ?)}"
                 , new Object[]{staffID, position, name, phone, address, email});
     }
+
+    public static void delete(int staffID) throws Exception {
+        ExecuteQuery.executeReader("{CALL Savbase_RemoveStaff(?)}"
+                , new Object[]{staffID});
+    }
 }

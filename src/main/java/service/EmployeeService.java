@@ -8,6 +8,7 @@ import models.builder.AccountBuilder;
 import models.builder.SavingAccountBuilder;
 
 import javax.sql.rowset.CachedRowSet;
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class EmployeeService {
@@ -26,5 +27,11 @@ public class EmployeeService {
         ObservableList<Account> result = FXCollections.observableArrayList(accounts);
         return result;
 
+    }
+
+    public static void create(int position, String name, String ID, boolean sex, Date birthDate, String phone,
+                              String address, String password, String email) throws Exception {
+            ExecuteQuery.executeReader("{CALL Savbase_AddNewStaff(?, ?, ?, ?, ?, ?, ?, ?, ?)}"
+                    , new Object[]{position, name, ID, sex, birthDate, phone, address, password, email});
     }
 }

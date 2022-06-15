@@ -34,5 +34,7 @@ public interface ScenePaths {
 
         String VIEW_EMPLOYEE_INFO ="/views/dialogs/employee_info_dialog.fxml";
         String ADD_NEW_SAVING_TYPE="/views/dialogs/add_saving_type.fxml";
+
+        String ADD_EMPLOYEE = "/views/dialogs/add_employee_dialog.fxml";
     }
 }

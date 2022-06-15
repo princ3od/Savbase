@@ -138,7 +138,15 @@ public class EmployeesController {
 
     @FXML
     void onOpenAdd(ActionEvent event) {
-
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.ADD_EMPLOYEE, "Thêm nhân viên", null);
+        try {
+            String result = dialog.showAndWait(false);
+            if (result.equals("success")) {
+                loadData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

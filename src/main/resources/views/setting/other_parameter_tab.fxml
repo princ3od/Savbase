@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<?import javafx.scene.layout.StackPane?>
+<StackPane fx:id="root" prefHeight="713.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.OtherParameterController">
+   <children>
+      <AnchorPane prefHeight="682.0" prefWidth="1087.0" styleClass="tabpage" stylesheets="@../../css/tab.css">
+         <children>
+            <Pane layoutX="50.0" layoutY="48.0" prefHeight="113.0" prefWidth="967.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="33.0" layoutY="46.0" style="-fx-font-weight: 700; -fx-font-size: 16;" text="Số tiền gửi thêm tối thiểu" />
+                  <JFXTextField fx:id="txtMinDeposit" layoutX="286.0" layoutY="41.0" prefHeight="31.0" prefWidth="469.0" />
+                  <JFXButton layoutX="819.0" layoutY="36.0" onAction="#onSaveAmount" prefHeight="41.0" prefWidth="109.0" style="-fx-background-radius: 30; -fx-background-color: #32A05F; -fx-text-fill: white;" text="Lưu" />
+               </children>
+            </Pane>
+            <Pane layoutX="50.0" layoutY="249.0" prefHeight="113.0" prefWidth="967.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="33.0" layoutY="46.0" style="-fx-font-weight: 700; -fx-font-size: 16;" text="Số tiền gửi ban đầu tối thiểu" />
+                  <JFXTextField fx:id="txtMinInit" layoutX="286.0" layoutY="41.0" prefHeight="31.0" prefWidth="469.0" />
+                  <JFXButton layoutX="819.0" layoutY="36.0" onAction="#onSaveInit" prefHeight="41.0" prefWidth="109.0" style="-fx-background-radius: 30; -fx-background-color: #32A05F; -fx-text-fill: white;" text="Lưu" />
+               </children>
+            </Pane>
+            <Pane layoutX="50.0" layoutY="437.0" prefHeight="113.0" prefWidth="967.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="33.0" layoutY="46.0" style="-fx-font-weight: 700; -fx-font-size: 16;" text="Điều khiển tự động đóng sổ" />
+                  <JFXButton layoutX="819.0" layoutY="36.0" onAction="#onSaveControl" prefHeight="41.0" prefWidth="109.0" style="-fx-background-radius: 30; -fx-background-color: #32A05F; -fx-text-fill: white;" text="Lưu" />
+                  <JFXComboBox fx:id="cboControl" layoutX="291.0" layoutY="41.0" prefHeight="31.0" prefWidth="469.0" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+
+   </children>
+</StackPane>

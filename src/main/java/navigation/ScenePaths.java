@@ -23,7 +23,7 @@ public interface ScenePaths {
 
         interface SettingTab {
             String SAVING_TYPES = "/views/setting/saving_type_tab.fxml";
-            String OTHER_PARAMS = "";
+            String OTHER_PARAMS = "/views/setting/other_parameter_tab.fxml";
             String EMPLOYEES = "/views/setting/employee_tab.fxml";
         }
     }

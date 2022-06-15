@@ -1,6 +1,7 @@
 package controllers.tabs;
 
 import com.jfoenix.controls.JFXButton;
+import command.DelEmployeeCommand;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import command.GetEmployeesCommand;
 import javafx.beans.property.SimpleStringProperty;
@@ -133,7 +134,32 @@ public class EmployeesController {
 
     @FXML
     void onDel(ActionEvent event) {
-
+        if (tbEmployee.getSelectionModel().getSelectedItem() == null) return;
+        try {
+            DelEmployeeCommand command = new DelEmployeeCommand(tbEmployee.getSelectionModel().getSelectedItem().getStaffID());
+            command.setOnSucceed(new Callback() {
+                @Override
+                public Object call(Object o) {
+                    SnackBarUtils.getInstance().show(Utils.getRoot(), "Xóa thành công");
+                    loadData();
+                    return null;
+                }
+            });
+            command.setOnFail(new Callback() {
+                @Override
+                public Object call(Object o) {
+                    if (command.getException().getMessage().equals("The statement did not return a result set.")) {
+                        SnackBarUtils.getInstance().show(Utils.getRoot(), "Xóa thành công");
+                        loadData();
+                    }
+                    else SnackBarUtils.getInstance().show(Utils.getRoot(), "Xóa thất bại, lỗi: " + command.getException().getMessage());
+                    return null;
+                }
+            });
+            command.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

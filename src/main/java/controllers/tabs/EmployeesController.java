@@ -151,7 +151,16 @@ public class EmployeesController {
 
     @FXML
     void onOpenEdit(ActionEvent event) {
-
+        if (tbEmployee.getSelectionModel().getSelectedItem() == null) return;
+        AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.EDIT_EMPLOYEE, "Sửa thông tin nhân viên", tbEmployee.getSelectionModel().getSelectedItem());
+        try {
+            String result = dialog.showAndWait(false);
+            if (result.equals("success")) {
+                loadData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

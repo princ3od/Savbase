@@ -34,4 +34,9 @@ public class EmployeeService {
             ExecuteQuery.executeReader("{CALL Savbase_AddNewStaff(?, ?, ?, ?, ?, ?, ?, ?, ?)}"
                     , new Object[]{position, name, ID, sex, birthDate, phone, address, password, email});
     }
+
+    public static void update(int staffID, int position, String name, String phone, String email, String address) throws Exception {
+        ExecuteQuery.executeReader("{CALL Savbase_ModifyStaffInfo(?, ?, ?, ?, ?, ?)}"
+                , new Object[]{staffID, position, name, phone, address, email});
+    }
 }

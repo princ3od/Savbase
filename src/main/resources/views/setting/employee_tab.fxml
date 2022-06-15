@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
+
+<StackPane fx:id="root" prefHeight="713.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.EmployeesController">
+    <children>
+        <AnchorPane prefHeight="755.0" prefWidth="868.0" styleClass="tabpage" stylesheets="@../../css/tab.css">
+            <children>
+                <TableView fx:id="tbEmployee" layoutX="41.0" layoutY="80.0" prefHeight="560.0" prefWidth="804.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="23.0">
+                    <stylesheets>
+                        <URL value="@../../css/table.css" />
+                    </stylesheets></TableView>
+                <JFXButton fx:id="btnAddEmployee" layoutX="741.0" layoutY="20.0" onAction="#onOpenAdd" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Thêm mới" textFill="WHITE" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="20.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+                <JFXButton fx:id="btnDelEmployee" layoutX="504.0" layoutY="20.0" onAction="#onDel" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Xóa" textFill="WHITE" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="20.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+            <JFXButton fx:id="btnEditEmployee" layoutX="623.0" layoutY="20.0" onAction="#onOpenEdit" prefHeight="38.0" prefWidth="104.0" ripplerFill="#32a05f" style="-fx-background-color: #32A05F; -fx-background-radius: 30;" text="Sửa" textFill="WHITE" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="20.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <MFXProgressBar fx:id="progressBar" layoutX="53.0" layoutY="82.0" prefHeight="0.0" prefWidth="804.0" />
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

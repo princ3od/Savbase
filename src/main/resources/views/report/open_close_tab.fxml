@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.tabs.OpenCloseController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="749.0" prefWidth="1616.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.OpenCloseController">
+    <children>
+        <AnchorPane layoutX="855.0" layoutY="7.0" prefHeight="741.0" prefWidth="479.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <JFXButton fx:id="btnExport" layoutX="322.0" layoutY="14.0" onAction="#onExport" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;" text="Xuất báo cáo" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="14.0" />
+                <Label fx:id="lblTitle" layoutX="23.0" layoutY="71.0" style="-fx-font-weight: 700; -fx-font-size: 18;" text="Báo cáo mở/đóng sổ tháng ..." AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="71.0" />
+                <TableView fx:id="tbReport" layoutX="35.0" layoutY="148.0" prefHeight="566.0" prefWidth="415.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="148.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                </TableView>
+            <Label fx:id="lblType" layoutX="23.0" layoutY="98.0" style="-fx-font-weight: 700; -fx-font-size: 14;" text="Loại tiết kiệm: " />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="6.0" prefHeight="749.0" prefWidth="1122.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="494.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <AreaChart fx:id="acReport" layoutX="9.0" layoutY="62.0" prefHeight="660.0" prefWidth="992.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" />
+                    </yAxis>
+                </AreaChart>
+                <Label layoutX="420.0" layoutY="21.0" text="Từ" AnchorPane.rightAnchor="356.0" AnchorPane.topAnchor="21.0" />
+                <JFXDatePicker fx:id="dpFrom" layoutX="453.0" layoutY="16.0" prefHeight="31.0" prefWidth="127.0" AnchorPane.rightAnchor="213.0" AnchorPane.topAnchor="16.0" />
+                <Label layoutX="590.0" layoutY="21.0" text="đến" AnchorPane.rightAnchor="177.0" AnchorPane.topAnchor="21.0" />
+                <JFXDatePicker fx:id="dpTo" layoutX="631.0" layoutY="16.0" prefHeight="31.0" prefWidth="127.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="16.0" />
+            <JFXComboBox fx:id="cboType" layoutX="605.0" layoutY="16.0" prefHeight="31.0" prefWidth="127.0" AnchorPane.rightAnchor="390.0" />
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

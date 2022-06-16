@@ -1,7 +1,15 @@
 package utils;
 
+import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -41,6 +49,47 @@ public class Utils {
 
     public static StackPane getRoot() {
         return _stackPane;
+    }
+
+    public static void handleExport(TableView<?> tbReport, java.sql.Date date, String title) {
+        Workbook workbook = new HSSFWorkbook();
+        Sheet spreadsheet = workbook.createSheet("sample");
+        Row row = spreadsheet.createRow(0);
+
+        for (int j = 0; j < tbReport.getColumns().size(); j++) {
+            row.createCell(j).setCellValue(tbReport.getColumns().get(j).getText());
+        }
+
+        for (int i = 0; i < tbReport.getItems().size(); i++) {
+            row = spreadsheet.createRow(i + 1);
+            for (int j = 0; j < tbReport.getColumns().size(); j++) {
+                if(tbReport.getColumns().get(j).getCellData(i) != null) {
+                    row.createCell(j).setCellValue(tbReport.getColumns().get(j).getCellData(i).toString());
+                }
+                else {
+                    row.createCell(j).setCellValue("");
+                }
+            }
+        }
+
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialFileName(title);
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("XLS files (*.xls)", "*.xls")
+            );
+            File saveFile = fileChooser.showSaveDialog(tbReport.getScene().getWindow());
+            if (saveFile != null) {
+                FileOutputStream fileOut = new FileOutputStream(saveFile.getAbsolutePath());
+                workbook.write(fileOut);
+                fileOut.close();
+                SnackBarUtils.getInstance().show(Utils.getRoot(), "Xuất báo cáo thành công");
+            }
+
+        } catch (Exception e) {
+            SnackBarUtils.getInstance().show(Utils.getRoot(), "Lỗi: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void setRoot(StackPane stackPane) {

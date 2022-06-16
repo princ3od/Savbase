@@ -3,13 +3,11 @@ package controllers.tabs;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import command.GetRevenueReportsCommand;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,20 +21,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import models.RevenueReport;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import utils.SnackBarUtils;
 import utils.Utils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
@@ -201,9 +191,6 @@ public class RevenueController {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     loadTable(key);
-
-
-
                 }
             });
 
@@ -226,44 +213,7 @@ public class RevenueController {
         btnExport.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Workbook workbook = new HSSFWorkbook();
-                Sheet spreadsheet = workbook.createSheet("sample");
-                Row row = spreadsheet.createRow(0);
-
-                for (int j = 0; j < tbReport.getColumns().size(); j++) {
-                    row.createCell(j).setCellValue(tbReport.getColumns().get(j).getText());
-                }
-
-                for (int i = 0; i < tbReport.getItems().size(); i++) {
-                    row = spreadsheet.createRow(i + 1);
-                    for (int j = 0; j < tbReport.getColumns().size(); j++) {
-                        if(tbReport.getColumns().get(j).getCellData(i) != null) {
-                            row.createCell(j).setCellValue(tbReport.getColumns().get(j).getCellData(i).toString());
-                        }
-                        else {
-                            row.createCell(j).setCellValue("");
-                        }
-                    }
-                }
-
-                try {
-                    FileChooser fileChooser = new FileChooser();
-                    fileChooser.setInitialFileName("revenue_" + Utils.dateFormatter.format(date));
-                    fileChooser.getExtensionFilters().addAll(
-                            new FileChooser.ExtensionFilter("XLS files (*.xls)", "*.xls")
-                    );
-                    File saveFile = fileChooser.showSaveDialog(tbReport.getScene().getWindow());
-                    if (saveFile != null) {
-                        FileOutputStream fileOut = new FileOutputStream(saveFile.getAbsolutePath());
-                        workbook.write(fileOut);
-                        fileOut.close();
-                        SnackBarUtils.getInstance().show(Utils.getRoot(), "Xuất báo cáo thành công");
-                    }
-
-                } catch (Exception e) {
-                    SnackBarUtils.getInstance().show(Utils.getRoot(), "Lỗi: " + e.getMessage());
-                    e.printStackTrace();
-                }
+                Utils.handleExport(tbReport, date, "revenue_" + new SimpleDateFormat("dd_MM_yyyy").format(date));
             }
         });
 

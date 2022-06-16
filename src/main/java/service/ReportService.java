@@ -30,7 +30,7 @@ public class ReportService {
     }
 
     public static ObservableList<OpenCloseReport> getOpenCloses() throws Exception {
-        CachedRowSet data = ExecuteQuery.executeReader("{CALL Savbase_LoadRevenueData()}", null);
+        CachedRowSet data = ExecuteQuery.executeReader("{CALL Savbase_LoadMonthlyData()}", null);
         ArrayList<OpenCloseReport> openCloseReports = new ArrayList<>();
 
         while (data.next()) {
@@ -39,6 +39,7 @@ public class ReportService {
                     .setOpen(data.getInt("SoSoMo"))
                     .setClose(data.getInt("SoSoDong"))
                     .setDifference(data.getInt("ChenhLech"));
+            openCloseReports.add(reportBuilder.getResult());
 
         }
         ObservableList<OpenCloseReport> result = FXCollections.observableArrayList(openCloseReports);

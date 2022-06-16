@@ -2,6 +2,7 @@ package controllers.dialogs;
 
 import com.jfoenix.controls.*;
 import command.AddSavingAccountCommand;
+import command.GetOtherParameterCommand;
 import command.GetSavingTypeCommand;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,7 +14,9 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import models.OtherParameter;
 import utils.SnackBarUtils;
+import utils.Utils;
 
 import java.sql.Date;
 
@@ -66,8 +69,25 @@ public class AddAccountController extends BaseDialogController {
 
     private ToggleGroup group;
 
+    OtherParameter otherParameter;
+
     public void initialize() {
-        System.out.println("cc intialize");
+        GetOtherParameterCommand otherParameterCommand = new GetOtherParameterCommand();
+        otherParameterCommand.setOnSucceed(new Callback() {
+            @Override
+            public Object call(Object param) {
+                otherParameter = (OtherParameter)otherParameterCommand.getResult();
+                return null;
+            }
+        });
+        otherParameterCommand.setOnFail(new Callback() {
+            @Override
+            public Object call(Object param) {
+                SnackBarUtils.getInstance().show(Utils.getRoot(), "Đã có lỗi xảy ra khi lấy tham số. Lỗi: " + otherParameterCommand.getException().getMessage());
+                return null;
+            }
+        });
+        otherParameterCommand.execute();
     }
 
 
@@ -150,25 +170,34 @@ public class AddAccountController extends BaseDialogController {
                 return;
             }
         }
+        double amount;
         try {
-            double __ = Double.parseDouble(txtSoTien.getText());
+             amount = Double.parseDouble(txtSoTien.getText());
+             if (amount < otherParameter.getMinInitDeposit()) {
+                 SnackBarUtils.getInstance().show(root,
+                         "Số tiền ban đầu không được nhỏ hơn " + Utils.currencyFormat.format(otherParameter.getMinInitDeposit()));
+                 return;
+             }
         }
         catch (Exception e) {
             SnackBarUtils.getInstance().show(root, "Vui lòng nhập đúng định dạng tiền");
             return;
         }
+
         Date ngaySinh;
         if (((JFXRadioButton) group.getSelectedToggle()).getText().equals("Cho khách hàng cũ")) ngaySinh = null;
-        else  ngaySinh =  new Date(dpNgaySinh.getValue().getYear(), dpNgaySinh.getValue().getMonth().getValue(), dpNgaySinh.getValue().getDayOfMonth());
+        else  ngaySinh =  Utils.localDateToSqlDate(dpNgaySinh.getValue());
         AddSavingAccountCommand command = new AddSavingAccountCommand(((JFXRadioButton) group.getSelectedToggle()).getText(),
                 txtCMND.getText(), cboGioiTinh.getSelectionModel().getSelectedItem(), ngaySinh,
                 txtHoTen.getText(), txtDiaChi.getText(), txtEmail.getText(), txtSDT.getText(), cboLoaiSo.getSelectionModel().getSelectedItem(),
-                new Date(dpNgayMo.getValue().getYear(), dpNgayMo.getValue().getMonth().getValue(), dpNgayMo.getValue().getDayOfMonth()),
-                Double.parseDouble(txtSoTien.getText()));
+                Utils.localDateToSqlDate(dpNgayMo.getValue()),
+                amount);
         command.setOnSucceed(new Callback() {
             @Override
             public Object call(Object param) {
                 SnackBarUtils.getInstance().show(root, "Thêm thành công");
+                setResult("success");
+                onClose();
                 return null;
             }
         });
@@ -177,8 +206,13 @@ public class AddAccountController extends BaseDialogController {
             public Object call(Object param) {
                 if (command.getException().getMessage().equals("The statement did not return a result set.")) {
                     SnackBarUtils.getInstance().show(root, "Thêm thành công");
+                    setResult("success");
+                    onClose();
                 }
-                else SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
+                else {
+                    SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
+                    setResult("fail");
+                }
                 return null;
             }
         });

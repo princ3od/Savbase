@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-
 <StackPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dialogs.AddAccountController">
    <children>
       <AnchorPane prefHeight="583.0" prefWidth="732.0" style="-fx-background-color: white;">
@@ -23,7 +22,7 @@
             <Label layoutX="59.0" layoutY="148.0" text="Họ và tên" />
             <JFXTextField fx:id="txtHoTen" layoutX="181.0" layoutY="143.0" prefHeight="31.0" prefWidth="213.0" />
             <Label layoutX="418.0" layoutY="105.0" text="Ngày sinh" />
-            <JFXDatePicker fx:id="dpNgaySinh" defaultColor="#0f4641" layoutX="513.0" layoutY="100.0" prefHeight="33.0" prefWidth="181.0" style="-fx-background-color: white; -fx-border-radius: 30; -fx-border-color: black;">
+            <JFXDatePicker fx:id="dpNgaySinh" defaultColor="#0f4641" layoutX="513.0" layoutY="100.0" prefHeight="33.0" prefWidth="181.0">
                <padding>
                   <Insets left="30.0" />
                </padding>
@@ -39,7 +38,7 @@
             <Label layoutX="59.0" layoutY="359.0" text="Số tiền ban đầu" />
             <JFXTextField fx:id="txtSoTien" layoutX="181.0" layoutY="354.0" prefHeight="31.0" prefWidth="512.0" />
             <Label layoutX="59.0" layoutY="412.0" text="Ngày mở sổ" />
-            <JFXDatePicker fx:id="dpNgayMo" defaultColor="#0f4641" layoutX="181.0" layoutY="406.0" prefHeight="33.0" prefWidth="181.0" style="-fx-background-color: white; -fx-border-radius: 30; -fx-border-color: black;">
+            <JFXDatePicker fx:id="dpNgayMo" defaultColor="#0f4641" layoutX="181.0" layoutY="406.0" prefHeight="33.0" prefWidth="181.0">
                <padding>
                   <Insets left="30.0" />
                </padding>

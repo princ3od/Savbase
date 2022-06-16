@@ -1,0 +1,40 @@
+@import './constants.css';
+
+.tab {
+    -fx-background-radius: 24 0 0 24;
+    -fx-background-color: #fafafa;
+    -fx-padding: 8 48;
+}
+
+.tab:hover {
+    -fx-text-fill: -primary;
+    -fx-background-color: #E0E0E0;
+}
+
+.tab-selected {
+    -fx-background-radius: 24 0 0 24;
+    -fx-text-fill: -primary;
+    -fx-background-color: #E0E0E0;
+    -fx-padding: 8 48;
+}
+
+.horizontal-tab {
+    -fx-background-color: transparent;
+    -fx-padding: 8 2;
+}
+
+.horizontal-tab:hover {
+    -fx-text-fill: -primary;
+}
+
+.horizontal-tab-selected {
+    -fx-padding: 8 2;
+    -fx-text-fill: -primary;
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: -primary;
+    -fx-border-style: solid;
+}
+
+.tabpage {
+    -fx-background-color: #E0E0E0;
+}

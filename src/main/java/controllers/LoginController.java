@@ -5,12 +5,18 @@ import com.jfoenix.controls.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.skins.JFXProgressBarSkin;
 import command.LoginCommand;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
+import models.Account;
+import navigation.Navigation;
+import navigation.ScenePaths;
+import stores.AppStore;
+import utils.SnackBarUtils;
+
 
 public class LoginController {
 
@@ -20,6 +26,9 @@ public class LoginController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private StackPane root;
 
     @FXML
     private JFXTextField txtAccount;
@@ -38,6 +47,7 @@ public class LoginController {
 
     @FXML
     void initialize() {
+        btnLogin.disableProperty().bind(Bindings.or(txtAccount.textProperty().isEmpty(), txtPassword.textProperty().isEmpty()));
     }
 
     void setOnLogin(boolean isLogining) {
@@ -55,15 +65,12 @@ public class LoginController {
             @Override
             public Object call(Object param) {
                 setOnLogin(false);
-                Alert alert;
                 if (loginCommand.getResult() == null) {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Tài khoản hoặc mật khẩu không đúng");
+                    SnackBarUtils.getInstance().show(root, "Tài khoản hoặc mật khẩu không hợp lệ.");
                 } else {
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Đăng nhập thành công");
+                    AppStore.setCurrentAccount((Account) loginCommand.getResult());
+                    Navigation.getInstance().pushAndRemoveAll(ScenePaths.HOME);
                 }
-                alert.showAndWait();
                 return null;
             }
         });
@@ -71,15 +78,11 @@ public class LoginController {
             @Override
             public Object call(Object param) {
                 setOnLogin(false);
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Đã có lỗi xảy ra!");
-                alert.setContentText(loginCommand.getException().getMessage());
-                alert.showAndWait();
+                SnackBarUtils.getInstance().show(root, "Lỗi: " + loginCommand.getException().getMessage());
                 return null;
             }
         });
         loginCommand.execute();
     }
-
 
 }

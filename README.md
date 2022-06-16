@@ -19,7 +19,7 @@ A Saving accounts management application
 
 **Server:** SQL Server
 
-**UI Library:** [JFoenix](https://github.com/sshahine/JFoenix), [MaterialFX](https://github.com/sshahine/JFoenix)
+**UI Library:** [JFoenix](https://github.com/sshahine/JFoenix), [MaterialFX](https://mvnrepository.com/artifact/io.github.palexdev/materialfx/11.13.5)
 
 
 ## Installation

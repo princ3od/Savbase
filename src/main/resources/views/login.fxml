@@ -1,62 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import io.github.palexdev.materialfx.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #036666; -fx-alignment: center;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #036666;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
     <children>
-        <AnchorPane prefHeight="530.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 16;">
+        <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #036666; -fx-alignment: center;">
             <children>
-                <JFXTextField fx:id="txtAccount" focusColor="#036666" labelFloat="true" layoutX="64.0" layoutY="251.0" prefHeight="35.0" prefWidth="274.0" promptText="Tài khoản">
-                    <font>
-                        <Font name="Segoe UI" size="18.0" />
-                    </font>
-                </JFXTextField>
-                <JFXPasswordField fx:id="txtPassword" focusColor="#036666" labelFloat="true" layoutX="63.0" layoutY="312.0" prefHeight="25.0" prefWidth="274.0" promptText="Mật khẩu">
-                    <font>
-                        <Font name="Segoe UI" size="18.0" />
-                    </font>
-                </JFXPasswordField>
-                <JFXCheckBox fx:id="ckbRemember" checkedColor="#036666" layoutX="64.0" layoutY="366.0" prefHeight="19.0" prefWidth="274.0" text="Ghi nhớ tài khoản">
-                    <font>
-                        <Font name="Segoe UI" size="16.0" />
-                    </font>
-                </JFXCheckBox>
-                <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="63.0" layoutY="412.0" onAction="#onLogin" prefHeight="47.0" prefWidth="274.0" styleClass="raised-button" stylesheets="@../css/button.css" text="ĐĂNG NHẬP" textFill="WHITE" />
-                <Label layoutX="158.0" layoutY="492.0" text="Savbase © 2022">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font></Label>
-            <MFXProgressSpinner fx:id="progressBar" layoutX="181.0" layoutY="417.0" radius="16.0" styleClass="progress-bar" stylesheets="@../css/progressbar.css" visible="false" />
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="151.0" layoutY="32.0">
-               <image>
-                  <Image url="@../../../../../../../../Downloads/logo_medium.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="143.0" layoutY="138.0" text="Savbase" textFill="#14746f">
-               <font>
-                  <Font name="Segoe UI Bold" size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="157.0" layoutY="175.0" text="All in one place">
-               <font>
-                  <Font name="Segoe UI Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="155.0" layoutY="211.0" text="Đăng nhập" textFill="#797979">
-               <font>
-                  <Font name="Segoe UI Bold" size="18.0" />
-               </font>
-            </Label>
+                <AnchorPane prefHeight="530.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 16;">
+                    <children>
+                        <JFXTextField fx:id="txtAccount" focusColor="#036666" labelFloat="true" layoutX="64.0" layoutY="251.0" prefHeight="35.0" prefWidth="274.0" promptText="Tài khoản">
+                            <font>
+                                <Font name="Segoe UI" size="18.0" />
+                            </font>
+                        </JFXTextField>
+                        <JFXPasswordField fx:id="txtPassword" focusColor="#036666" labelFloat="true" layoutX="63.0" layoutY="312.0" prefHeight="25.0" prefWidth="274.0" promptText="Mật khẩu">
+                            <font>
+                                <Font name="Segoe UI" size="18.0" />
+                            </font>
+                        </JFXPasswordField>
+                        <JFXCheckBox fx:id="ckbRemember" checkedColor="#036666" layoutX="64.0" layoutY="366.0" prefHeight="19.0" prefWidth="274.0" text="Ghi nhớ tài khoản">
+                            <font>
+                                <Font name="Segoe UI" size="16.0" />
+                            </font>
+                        </JFXCheckBox>
+                        <JFXButton fx:id="btnLogin" buttonType="RAISED" defaultButton="true" layoutX="63.0" layoutY="412.0" onAction="#onLogin" prefHeight="47.0" prefWidth="274.0" styleClass="raised-button" stylesheets="@../css/button.css" text="ĐĂNG NHẬP" textFill="WHITE" />
+                        <Label layoutX="158.0" layoutY="492.0" text="Savbase © 2022">
+                            <font>
+                                <Font name="Segoe UI" size="12.0" />
+                            </font>
+                        </Label>
+                        <MFXProgressSpinner fx:id="progressBar" layoutX="181.0" layoutY="417.0" radius="16.0" styleClass="progress-bar" stylesheets="@../css/progressbar.css" visible="false" />
+                        <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="151.0" layoutY="32.0">
+                            <image>
+                                <Image url="@../images/logo.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="143.0" layoutY="138.0" text="Savbase" textFill="#14746f">
+                            <font>
+                                <Font name="Segoe UI Bold" size="30.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="157.0" layoutY="175.0" text="All in one place">
+                            <font>
+                                <Font name="Segoe UI Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="155.0" layoutY="211.0" text="Đăng nhập" textFill="#797979">
+                            <font>
+                                <Font name="Segoe UI Bold" size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <effect>
+                        <DropShadow blurType="TWO_PASS_BOX" />
+                    </effect>
+                </AnchorPane>
             </children>
-            <effect>
-                <DropShadow blurType="TWO_PASS_BOX" />
-            </effect>
-        </AnchorPane>
+        </VBox>
     </children>
-</VBox>
+</StackPane>

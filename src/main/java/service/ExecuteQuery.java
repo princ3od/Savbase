@@ -22,6 +22,19 @@ public class ExecuteQuery {
             connection.close();
         }
     }
+    public static Integer executeUpdate(String query, Object[] paramList) throws Exception {
+        Connection connection = DriverManager.getConnection(LocalSettings.getConnectionString());
+        try{
+
+            CallableStatement preparedStatement = connection.prepareCall(query);
+            preparedStatement = (CallableStatement) addParameter(query, preparedStatement, paramList);
+            int rowEffected = preparedStatement.executeUpdate();
+            return rowEffected;
+        }
+        finally {
+            connection.close();
+        }
+    }
 
     private static PreparedStatement addParameter(String query, PreparedStatement statement, Object[] paramList) throws SQLException {
         if (paramList != null) {
@@ -36,4 +49,6 @@ public class ExecuteQuery {
         }
         return statement;
     }
+
+
 }

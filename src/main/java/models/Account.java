@@ -66,5 +66,9 @@ public class Account {
     public String getEmail() {
         return email;
     }
+
+    public boolean isAdmin() {
+        return position == 1;
+    }
 }
 

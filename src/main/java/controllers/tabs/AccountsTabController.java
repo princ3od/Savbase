@@ -101,24 +101,7 @@ public class AccountsTabController {
                 }
             }
         });
-        command = new SavingAccountCommand();
-        command.setOnSucceed(new Callback() {
-            @Override
-            public Object call(Object param) {
-                setOnFetching(false);
-                tbvSavingAccount.setItems((ObservableList<SavingAccount>) command.getResult());
-                return null;
-            }
-        });
-        command.setOnFail(new Callback() {
-            @Override
-            public Object call(Object param) {
-                setOnFetching(false);
-                SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
-                return null;
-            }
-        });
-        command.execute();
+
 
         txtSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -139,6 +122,28 @@ public class AccountsTabController {
                 }
             }
         });
+        loadData();
+    }
+
+    void loadData() {
+        command = new SavingAccountCommand();
+        command.setOnSucceed(new Callback() {
+            @Override
+            public Object call(Object param) {
+                setOnFetching(false);
+                tbvSavingAccount.setItems((ObservableList<SavingAccount>) command.getResult());
+                return null;
+            }
+        });
+        command.setOnFail(new Callback() {
+            @Override
+            public Object call(Object param) {
+                setOnFetching(false);
+                SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
+                return null;
+            }
+        });
+        command.execute();
     }
 
     @FXML
@@ -146,6 +151,9 @@ public class AccountsTabController {
         AppDialog<String> dialog = new AppDialog(ScenePaths.DialogPaths.ADD_ACCOUNT, "Tạo sổ", null);
         try {
             dialog.showAndWait(false);
+            if (dialog.getResult() == "success") {
+                loadData();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

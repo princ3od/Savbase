@@ -5,6 +5,7 @@ import javafx.scene.layout.StackPane;
 import java.text.Format;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -30,6 +31,10 @@ public class Utils {
 
     public static java.sql.Date untilDateToSqlDate(java.util.Date rawDate) {
         return new java.sql.Date(rawDate.getTime());
+    }
+
+    public static java.sql.Date localDateToSqlDate(LocalDate rawDate) {
+        return new java.sql.Date(rawDate.getYear() - 1900, rawDate.getMonth().getValue() - 1, rawDate.getDayOfMonth());
     }
 
     private static StackPane _stackPane;

@@ -17,8 +17,8 @@ public interface ScenePaths {
         }
 
         interface ReportTab {
-            String SALES = "";
-            String OPEN_CLOSE_ACCOUNTS = "";
+            String SALES = "/views/report/revenue_tab.fxml";
+            String OPEN_CLOSE_ACCOUNTS = "/views/report/open_close_tab.fxml";
         }
 
         interface SettingTab {

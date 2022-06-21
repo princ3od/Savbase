@@ -1,12 +1,12 @@
 package controllers.tabs;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import command.AddTransactionCommand;
 import command.GetOtherParameterCommand;
+import command.SavingAccountCommand;
 import command.WithdrawInterestCommand;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,10 +15,13 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.util.Callback;
 import models.OtherParameter;
+import models.SavingAccount;
 import navigation.ScenePaths;
 import stores.AppStore;
 import utils.SnackBarUtils;
 import utils.Utils;
+
+import java.util.function.Function;
 
 public class TransactionsTabController {
 
@@ -27,9 +30,6 @@ public class TransactionsTabController {
 
     @FXML
     private JFXCheckBox chbWithdraw;
-
-    @FXML
-    private JFXTextField txtID;
 
     @FXML
     private JFXTextField txtName;
@@ -52,6 +52,9 @@ public class TransactionsTabController {
     @FXML
     private JFXButton btnDeposit;
 
+    @FXML
+    private JFXComboBox<String> cboID;
+
     OtherParameter otherParameter;
     @FXML
     void initialize() {
@@ -59,6 +62,24 @@ public class TransactionsTabController {
         chbWithdraw.setVisible(false);
         btnDeposit.setVisible(true);
         btnWithdraw.setVisible(false);
+        SavingAccountCommand savingAccountCommand = new SavingAccountCommand();
+        savingAccountCommand.setOnSucceed(new Callback() {
+            @Override
+            public Object call(Object param) {
+                cboID.setItems(FXCollections.observableArrayList(((ObservableList<SavingAccount>)savingAccountCommand.getResult()).stream().map(x -> {
+                    return x.getId() + "";
+                }).toList()));
+                return null;
+            }
+        });
+        savingAccountCommand.setOnFail(new Callback() {
+            @Override
+            public Object call(Object param) {
+                SnackBarUtils.getInstance().show(Utils.getRoot(), "Lỗi: " + savingAccountCommand.getException().getMessage());
+                return null;
+            }
+        });
+        savingAccountCommand.execute();
         GetOtherParameterCommand otherParameterCommand = new GetOtherParameterCommand();
         otherParameterCommand.setOnSucceed(new Callback() {
             @Override
@@ -111,7 +132,7 @@ public class TransactionsTabController {
         int accountId;
         double amount;
         try {
-            accountId = Integer.parseInt(txtID.getText());
+            accountId = Integer.parseInt(cboID.getValue());
         }
         catch (Exception e) {
             SnackBarUtils.getInstance().show(Utils.getRoot(), "Số tài khoản phải là số nguyên");
@@ -160,7 +181,7 @@ public class TransactionsTabController {
         int accountId;
         double amount;
         try {
-            accountId = Integer.parseInt(txtID.getText());
+            accountId = Integer.parseInt(cboID.getValue());
         }
         catch (Exception e) {
             SnackBarUtils.getInstance().show(Utils.getRoot(), "Số tài khoản phải là số nguyên");
@@ -217,7 +238,7 @@ public class TransactionsTabController {
     }
 
     boolean inputEmpty() {
-        return txtID.getText().isEmpty() || txtAmount.getText().isEmpty()
+        return cboID.getValue() == null|| txtAmount.getText().isEmpty()
                 || txtName.getText().isEmpty() || dpTransaction.getValue() == null;
     }
 

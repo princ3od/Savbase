@@ -5,6 +5,7 @@ import com.jfoenix.controls.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import command.AutoCalculateInterestCommand;
 import command.LoginCommand;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import javafx.beans.binding.Bindings;
@@ -48,6 +49,28 @@ public class LoginController {
     @FXML
     void initialize() {
         btnLogin.disableProperty().bind(Bindings.or(txtAccount.textProperty().isEmpty(), txtPassword.textProperty().isEmpty()));
+        AutoCalculateInterestCommand command = new AutoCalculateInterestCommand();
+        command.setOnSucceed(new Callback() {
+            @Override
+            public Object call(Object param) {
+                SnackBarUtils.getInstance().show(root, "Tự động tính lãi thành công!");
+                return null;
+            }
+        });
+        command.setOnFail(new Callback() {
+            @Override
+            public Object call(Object param) {
+                if (command.getException().getMessage().equals("The statement did not return a result set.")) {
+                    SnackBarUtils.getInstance().show(root, "Tự động tính lãi thành công!");
+
+                }
+                else {
+                    SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
+                }
+                return null;
+            }
+        });
+        command.execute();
     }
 
     void setOnLogin(boolean isLogining) {

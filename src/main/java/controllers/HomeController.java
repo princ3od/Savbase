@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import navigation.Navigable;
 import navigation.Navigation;

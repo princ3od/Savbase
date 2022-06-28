@@ -70,4 +70,12 @@ javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED
 - [Nguyễn Cao Cường](https://github.com/feelings93)
 - [Đinh Việt Hào](https://github.com/HaoDinh9999)
 ## Screenshots
-// Coming soon
+<p align="center">
+ <img src="./src/main/resources/screenshots/splash.png" alt="splash"/>
+ <img src="./src/main/resources/screenshots/login.png" alt="login"/>
+ <img src="./src/main/resources/screenshots/home.png" alt="home"/>
+ <img src="./src/main/resources/screenshots/report.png" alt="report"/>
+ <img src="./src/main/resources/screenshots/others.png" alt="others"/>
+ <img src="./src/main/resources/screenshots/view-info.png" alt="info"/>
+
+</p>

@@ -5,6 +5,8 @@ import command.AddTransactionCommand;
 import command.GetOtherParameterCommand;
 import command.SavingAccountCommand;
 import command.WithdrawInterestCommand;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,7 +23,12 @@ import stores.AppStore;
 import utils.SnackBarUtils;
 import utils.Utils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class TransactionsTabController {
 
@@ -56,6 +63,9 @@ public class TransactionsTabController {
     private JFXComboBox<String> cboID;
 
     OtherParameter otherParameter;
+
+    ObservableList<SavingAccount> accounts;
+
     @FXML
     void initialize() {
         setSelectedTabButton(btnTabDeposit);
@@ -66,9 +76,10 @@ public class TransactionsTabController {
         savingAccountCommand.setOnSucceed(new Callback() {
             @Override
             public Object call(Object param) {
-                cboID.setItems(FXCollections.observableArrayList(((ObservableList<SavingAccount>)savingAccountCommand.getResult()).stream().map(x -> {
+                cboID.setItems(FXCollections.observableArrayList(((ObservableList<SavingAccount>) savingAccountCommand.getResult()).stream().map(x -> {
                     return x.getId() + "";
                 }).toList()));
+                accounts = (ObservableList<SavingAccount>) savingAccountCommand.getResult();
                 return null;
             }
         });
@@ -84,7 +95,7 @@ public class TransactionsTabController {
         otherParameterCommand.setOnSucceed(new Callback() {
             @Override
             public Object call(Object param) {
-                otherParameter = (OtherParameter)otherParameterCommand.getResult();
+                otherParameter = (OtherParameter) otherParameterCommand.getResult();
                 return null;
             }
         });
@@ -96,6 +107,19 @@ public class TransactionsTabController {
             }
         });
         otherParameterCommand.execute();
+        cboID.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                SavingAccount _account = accounts.stream().filter(new Predicate<SavingAccount>() {
+                    @Override
+                    public boolean test(SavingAccount savingAccount) {
+                        return String.valueOf(savingAccount.getId()).equals(cboID.getValue());
+                    }
+                }).toList().get(0);
+                txtName.setText(_account.getName());
+            }
+        });
+        dpTransaction.setValue(LocalDate.now());
     }
 
     void setSelectedTabButton(JFXButton btn) {
@@ -133,15 +157,13 @@ public class TransactionsTabController {
         double amount;
         try {
             accountId = Integer.parseInt(cboID.getValue());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             SnackBarUtils.getInstance().show(Utils.getRoot(), "Số tài khoản phải là số nguyên");
             return;
         }
         try {
-           amount = Double.parseDouble(txtAmount.getText());
-        }
-        catch (Exception e) {
+            amount = Double.parseDouble(txtAmount.getText());
+        } catch (Exception e) {
             SnackBarUtils.getInstance().show(Utils.getRoot(), "Số tiền phải là số thực");
             return;
         }
@@ -164,8 +186,8 @@ public class TransactionsTabController {
             public Object call(Object param) {
                 if (command.getException().getMessage().equals("The statement did not return a result set.")) {
                     SnackBarUtils.getInstance().show(Utils.getRoot(), "Gửi tiền thành công");
-                }
-                else SnackBarUtils.getInstance().show(Utils.getRoot(), "Gửi tiền thất bại, lỗi: " + command.getException().getMessage());
+                } else
+                    SnackBarUtils.getInstance().show(Utils.getRoot(), "Gửi tiền thất bại, lỗi: " + command.getException().getMessage());
                 return null;
             }
         });
@@ -182,15 +204,13 @@ public class TransactionsTabController {
         double amount;
         try {
             accountId = Integer.parseInt(cboID.getValue());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             SnackBarUtils.getInstance().show(Utils.getRoot(), "Số tài khoản phải là số nguyên");
             return;
         }
         try {
             amount = Double.parseDouble(txtAmount.getText());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             SnackBarUtils.getInstance().show(Utils.getRoot(), "Số tiền phải là số thực");
             return;
         }
@@ -208,8 +228,8 @@ public class TransactionsTabController {
             public Object call(Object param) {
                 if (command.getException().getMessage().equals("The statement did not return a result set.")) {
                     SnackBarUtils.getInstance().show(Utils.getRoot(), "Rút tiền thành công");
-                }
-                else SnackBarUtils.getInstance().show(Utils.getRoot(), "Rút tiền thất bại, lỗi: " + command.getException().getMessage());
+                } else
+                    SnackBarUtils.getInstance().show(Utils.getRoot(), "Rút tiền thất bại, lỗi: " + command.getException().getMessage());
                 return null;
             }
         });
@@ -228,8 +248,8 @@ public class TransactionsTabController {
                 public Object call(Object param) {
                     if (withdrawInterestCommand.getException().getMessage().equals("The statement did not return a result set.")) {
                         SnackBarUtils.getInstance().show(Utils.getRoot(), "Rút tiền lãi thành công");
-                    }
-                    else SnackBarUtils.getInstance().show(Utils.getRoot(), "Rút tiền lãi thất bại, lỗi: " + withdrawInterestCommand.getException().getMessage());
+                    } else
+                        SnackBarUtils.getInstance().show(Utils.getRoot(), "Rút tiền lãi thất bại, lỗi: " + withdrawInterestCommand.getException().getMessage());
                     return null;
                 }
             });
@@ -238,7 +258,7 @@ public class TransactionsTabController {
     }
 
     boolean inputEmpty() {
-        return cboID.getValue() == null|| txtAmount.getText().isEmpty()
+        return cboID.getValue() == null || txtAmount.getText().isEmpty()
                 || txtName.getText().isEmpty() || dpTransaction.getValue() == null;
     }
 

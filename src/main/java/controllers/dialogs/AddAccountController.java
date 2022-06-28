@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import command.AddSavingAccountCommand;
 import command.GetOtherParameterCommand;
 import command.GetSavingTypeCommand;
+import command.SavingAccountCommand;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,10 +16,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import models.OtherParameter;
+import models.SavingAccount;
 import utils.SnackBarUtils;
 import utils.Utils;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.function.Predicate;
 
 public class AddAccountController extends BaseDialogController {
 
@@ -62,21 +66,20 @@ public class AddAccountController extends BaseDialogController {
     private ComboBox<String> cboLoaiSo;
 
     @FXML
-    private JFXButton btnTaoSo;
-
-    @FXML
-    private JFXButton btnDong;
+    private ComboBox<String> cbbOldAccounts;
 
     private ToggleGroup group;
 
     OtherParameter otherParameter;
+
+    ObservableList<SavingAccount> accounts;
 
     public void initialize() {
         GetOtherParameterCommand otherParameterCommand = new GetOtherParameterCommand();
         otherParameterCommand.setOnSucceed(new Callback() {
             @Override
             public Object call(Object param) {
-                otherParameter = (OtherParameter)otherParameterCommand.getResult();
+                otherParameter = (OtherParameter) otherParameterCommand.getResult();
                 return null;
             }
         });
@@ -88,6 +91,26 @@ public class AddAccountController extends BaseDialogController {
             }
         });
         otherParameterCommand.execute();
+
+        SavingAccountCommand savingAccountCommand = new SavingAccountCommand();
+        savingAccountCommand.setOnSucceed(new Callback() {
+            @Override
+            public Object call(Object param) {
+                accounts = (ObservableList<SavingAccount>) savingAccountCommand.getResult();
+                cbbOldAccounts.setItems(FXCollections.observableArrayList(((ObservableList<SavingAccount>) savingAccountCommand.getResult()).stream().map(x -> {
+                    return x.getNationalId() + "";
+                }).toList()));
+                return null;
+            }
+        });
+        savingAccountCommand.setOnFail(new Callback() {
+            @Override
+            public Object call(Object param) {
+                SnackBarUtils.getInstance().show(Utils.getRoot(), "Lỗi: " + savingAccountCommand.getException().getMessage());
+                return null;
+            }
+        });
+        savingAccountCommand.execute();
     }
 
 
@@ -104,13 +127,13 @@ public class AddAccountController extends BaseDialogController {
                 // Có lựa chọn
                 if (group.getSelectedToggle() != null) {
                     JFXRadioButton button = (JFXRadioButton) group.getSelectedToggle();
-                   txtHoTen.setText("");
-                   txtDiaChi.setText("");
-                   txtEmail.setText("");
-                   txtSDT.setText("");
-                   dpNgaySinh.setValue(null);
-                   txtCMND.setText("");
-                   cboGioiTinh.getSelectionModel().clearSelection();
+                    txtHoTen.setText("");
+                    txtDiaChi.setText("");
+                    txtEmail.setText("");
+                    txtSDT.setText("");
+                    dpNgaySinh.setValue(null);
+                    txtCMND.setText("");
+                    cboGioiTinh.getSelectionModel().clearSelection();
                     if (button.getText().equals("Cho khách hàng cũ")) {
                         txtHoTen.setDisable(true);
                         txtDiaChi.setDisable(true);
@@ -118,14 +141,17 @@ public class AddAccountController extends BaseDialogController {
                         txtSDT.setDisable(true);
                         dpNgaySinh.setDisable(true);
                         cboGioiTinh.setDisable(true);
-                    }
-                    else {
+                        cbbOldAccounts.setVisible(true);
+                        txtCMND.setVisible(false);
+                    } else {
                         txtHoTen.setDisable(false);
                         txtDiaChi.setDisable(false);
                         txtEmail.setDisable(false);
                         txtSDT.setDisable(false);
                         dpNgaySinh.setDisable(false);
                         cboGioiTinh.setDisable(false);
+                        cbbOldAccounts.setVisible(false);
+                        txtCMND.setVisible(true);
                     }
                 }
             }
@@ -152,6 +178,25 @@ public class AddAccountController extends BaseDialogController {
         });
         getSavingTypeCommand.execute();
 
+        cbbOldAccounts.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                SavingAccount _account = accounts.stream().filter(new Predicate<SavingAccount>() {
+                    @Override
+                    public boolean test(SavingAccount savingAccount) {
+                        return String.valueOf(savingAccount.getNationalId()).equals(cbbOldAccounts.getValue());
+                    }
+                }).toList().get(0);
+                txtHoTen.setText(_account.getName());
+                txtDiaChi.setText(_account.getAddress());
+                txtEmail.setText(_account.getEmail());
+                txtSDT.setText(_account.getPhoneNumber());
+                dpNgaySinh.setValue(LocalDate.parse("1998-02-27"));
+                cboGioiTinh.setValue(_account.getSex());
+                txtCMND.setText(_account.getNationalId());
+            }
+        });
+        dpNgayMo.setValue(LocalDate.now());
     }
 
     public void onAction() {
@@ -161,32 +206,30 @@ public class AddAccountController extends BaseDialogController {
                 return;
             }
 
-        }
-        else {
+        } else {
             if (txtCMND.getText().isEmpty() || txtSoTien.getText().isEmpty() || dpNgayMo.getValue() == null || cboLoaiSo.getSelectionModel().getSelectedItem() == null
-            || txtDiaChi.getText().isEmpty() || txtHoTen.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSDT.getText().isEmpty()
-            ||cboGioiTinh.getSelectionModel().getSelectedItem() == null || dpNgaySinh.getValue() == null) {
+                    || txtDiaChi.getText().isEmpty() || txtHoTen.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSDT.getText().isEmpty()
+                    || cboGioiTinh.getSelectionModel().getSelectedItem() == null || dpNgaySinh.getValue() == null) {
                 SnackBarUtils.getInstance().show(root, "Vui lòng nhập đầy đủ thông tin");
                 return;
             }
         }
         double amount;
         try {
-             amount = Double.parseDouble(txtSoTien.getText());
-             if (amount < otherParameter.getMinInitDeposit()) {
-                 SnackBarUtils.getInstance().show(root,
-                         "Số tiền ban đầu không được nhỏ hơn " + Utils.currencyFormat.format(otherParameter.getMinInitDeposit()));
-                 return;
-             }
-        }
-        catch (Exception e) {
+            amount = Double.parseDouble(txtSoTien.getText());
+            if (amount < otherParameter.getMinInitDeposit()) {
+                SnackBarUtils.getInstance().show(root,
+                        "Số tiền ban đầu không được nhỏ hơn " + Utils.currencyFormat.format(otherParameter.getMinInitDeposit()));
+                return;
+            }
+        } catch (Exception e) {
             SnackBarUtils.getInstance().show(root, "Vui lòng nhập đúng định dạng tiền");
             return;
         }
 
         Date ngaySinh;
         if (((JFXRadioButton) group.getSelectedToggle()).getText().equals("Cho khách hàng cũ")) ngaySinh = null;
-        else  ngaySinh =  Utils.localDateToSqlDate(dpNgaySinh.getValue());
+        else ngaySinh = Utils.localDateToSqlDate(dpNgaySinh.getValue());
         AddSavingAccountCommand command = new AddSavingAccountCommand(((JFXRadioButton) group.getSelectedToggle()).getText(),
                 txtCMND.getText(), cboGioiTinh.getSelectionModel().getSelectedItem(), ngaySinh,
                 txtHoTen.getText(), txtDiaChi.getText(), txtEmail.getText(), txtSDT.getText(), cboLoaiSo.getSelectionModel().getSelectedItem(),
@@ -208,8 +251,7 @@ public class AddAccountController extends BaseDialogController {
                     SnackBarUtils.getInstance().show(root, "Thêm thành công");
                     setResult("success");
                     onClose();
-                }
-                else {
+                } else {
                     SnackBarUtils.getInstance().show(root, "Lỗi: " + command.getException().getMessage());
                     setResult("fail");
                 }

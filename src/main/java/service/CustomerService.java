@@ -9,6 +9,7 @@ import javax.sql.rowset.CachedRowSet;
 import java.util.ArrayList;
 public class CustomerService {
     public static ObservableList<Customer> get(int id) throws Exception {
+
         CachedRowSet data = ExecuteQuery.executeReader("{CALL Savbase_GetCustomerIf(?)}", new Object[]{id});
         ArrayList<Customer> customers = new ArrayList<>();
 
@@ -18,8 +19,10 @@ public class CustomerService {
                     .setAddress(data.getString("Address")).setSex(data.getBoolean("GioiTinh") ? "Nam" : "Nữ");
 
             customers.add(customerBuilder.getResult());
+
         }
         ObservableList<Customer> result = FXCollections.observableArrayList(customers);
+
         return result;
 
     }

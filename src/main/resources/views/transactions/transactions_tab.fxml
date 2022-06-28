@@ -9,29 +9,47 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="592.0" prefWidth="888.0" styleClass="tabpage" stylesheets="@../../css/tab.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.tabs.TransactionsTabController">
-   <children>
-      <VBox fillWidth="false" prefHeight="592.0" prefWidth="888.0" style="-fx-alignment: center;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane prefHeight="504.0" prefWidth="494.0" style="-fx-background-color: white;">
-               <children>
-                  <Label layoutX="52.0" layoutY="126.0" text="Số tài khoản" />
-                  <Label layoutX="52.0" layoutY="162.0" text="Họ và tên" />
-                  <Label layoutX="52.0" layoutY="210.0" text="Số tiền giao dịch" />
-                  <Label layoutX="52.0" layoutY="257.0" text="Ngày giao dịch" />
-                  <JFXCheckBox fx:id="chbPrint" layoutX="53.0" layoutY="323.0" text="In hóa đơn" />
-                  <JFXCheckBox fx:id="chbWithdraw" layoutX="222.0" layoutY="323.0" text="Rút tiền lãi" />
-                  <JFXButton fx:id="btnWithdraw" layoutX="102.0" layoutY="394.0" onAction="#onWithdraw" prefHeight="48.0" prefWidth="311.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;" text="Rút tiền" textAlignment="CENTER" />
-                  <JFXTextField fx:id="txtName" layoutX="177.0" layoutY="168.0" prefHeight="31.0" prefWidth="264.0" />
-                  <JFXTextField fx:id="txtAmount" layoutX="177.0" layoutY="210.0" prefHeight="31.0" prefWidth="264.0" />
-                  <JFXDatePicker fx:id="dpTransaction" layoutX="177.0" layoutY="252.0" prefHeight="31.0" prefWidth="264.0" />
-                  <JFXButton fx:id="btnTabDeposit" layoutX="131.0" layoutY="40.0" onAction="#onChangeTab" prefHeight="48.0" prefWidth="126.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30 0 0 30;" text="Gửi tiền" textAlignment="CENTER" />
-                  <JFXButton fx:id="btnTabWithdraw" layoutX="257.0" layoutY="40.0" onAction="#onChangeTab" prefHeight="48.0" prefWidth="126.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 0 30 30 0;" text="Rút tiền" textAlignment="CENTER" />
-                  <JFXButton fx:id="btnDeposit" layoutX="102.0" layoutY="394.0" onAction="#onDeposit" prefHeight="48.0" prefWidth="311.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;" text="Gửi tiền" />
-                  <JFXComboBox fx:id="cboID" layoutX="177.0" layoutY="121.0" prefHeight="31.0" prefWidth="264.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="592.0" prefWidth="888.0" styleClass="tabpage" stylesheets="@../../css/tab.css"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.tabs.TransactionsTabController">
+    <children>
+        <VBox fillWidth="false" prefHeight="592.0" prefWidth="888.0" style="-fx-alignment: center;"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+            <children>
+                <AnchorPane prefHeight="504.0" prefWidth="494.0" style="-fx-background-color: white;">
+                    <children>
+                        <Label layoutX="52.0" layoutY="126.0" text="Số tài khoản"/>
+                        <Label layoutX="52.0" layoutY="170.0" text="Họ và tên"/>
+                        <Label layoutX="52.0" layoutY="210.0" text="Số tiền giao dịch"/>
+                        <Label layoutX="52.0" layoutY="257.0" text="Ngày giao dịch"/>
+                        <JFXCheckBox fx:id="chbWithdraw" layoutX="222.0" layoutY="323.0" text="Rút tiền lãi"/>
+                        <JFXButton fx:id="btnWithdraw" layoutX="102.0" layoutY="394.0" onAction="#onWithdraw"
+                                   prefHeight="48.0" prefWidth="311.0"
+                                   style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;"
+                                   text="Rút tiền" textAlignment="CENTER"/>
+                        <JFXTextField fx:id="txtName" layoutX="177.0" layoutY="168.0" prefHeight="31.0"
+                                      prefWidth="264.0"/>
+                        <JFXTextField fx:id="txtAmount" layoutX="177.0" layoutY="210.0" prefHeight="31.0"
+                                      prefWidth="264.0"/>
+                        <JFXDatePicker fx:id="dpTransaction" layoutX="177.0" layoutY="252.0" prefHeight="31.0"
+                                       prefWidth="264.0"/>
+                        <JFXButton fx:id="btnTabDeposit" layoutX="131.0" layoutY="40.0" onAction="#onChangeTab"
+                                   prefHeight="48.0" prefWidth="126.0"
+                                   style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30 0 0 30;"
+                                   text="Gửi tiền" textAlignment="CENTER"/>
+                        <JFXButton fx:id="btnTabWithdraw" layoutX="257.0" layoutY="40.0" onAction="#onChangeTab"
+                                   prefHeight="48.0" prefWidth="126.0"
+                                   style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 0 30 30 0;"
+                                   text="Rút tiền" textAlignment="CENTER"/>
+                        <JFXButton fx:id="btnDeposit" layoutX="102.0" layoutY="394.0" onAction="#onDeposit"
+                                   prefHeight="48.0" prefWidth="311.0"
+                                   style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;"
+                                   text="Gửi tiền"/>
+                        <JFXComboBox fx:id="cboID" layoutX="177.0" layoutY="121.0" prefHeight="31.0" prefWidth="264.0"/>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

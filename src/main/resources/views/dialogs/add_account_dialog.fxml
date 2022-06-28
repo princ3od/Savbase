@@ -46,6 +46,7 @@
             <Label layoutX="418.0" layoutY="412.0" text="Loại sổ" />
             <ComboBox fx:id="cboLoaiSo" layoutX="513.0" layoutY="404.0" prefHeight="38.0" prefWidth="190.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-background-color: white;" />
             <JFXButton fx:id="btnTaoSo" layoutX="335.0" layoutY="483.0" onAction="#onAction" prefHeight="47.0" prefWidth="134.0" style="-fx-background-color: #32A05F; -fx-text-fill: white; -fx-background-radius: 30;" text="Tạo sổ" />
+            <ComboBox fx:id="cbbOldAccounts" layoutX="181.0" layoutY="95.0" prefHeight="38.0" prefWidth="213.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-background-color: white;" visible="false" />
          </children>
       </AnchorPane>
    </children>
